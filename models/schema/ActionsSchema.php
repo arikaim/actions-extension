@@ -7,21 +7,21 @@
  * @license     http://www.arikaim.com/license
  * 
 */
-namespace Arikaim\Core\Models\Schema;
+namespace Arikaim\Extensions\Actions\Models\Schema;
 
 use Arikaim\Core\Db\Schema;
 
 /**
- * Jobs database table schema definition.
+ * Actions database table schema definition.
  */
-class JobsSchema extends Schema  
+class ActionsSchema extends Schema  
 {   
     /**
      * Db table name
      *
      * @var string
      */ 
-    protected $tableName = 'jobs';
+    protected $tableName = 'actions';
 
     /**
      * Create table
@@ -34,22 +34,15 @@ class JobsSchema extends Schema
         // columns
         $table->id();
         $table->prototype('uuid');
-        $table->status();  
         $table->string('name')->nullable(true);
-        $table->string('handler_class')->nullable(false);
-        $table->string('recuring_interval',50)->nullable(true);       
+        $table->string('handler_class')->nullable(false);      
         $table->string('extension_name')->nullable(true);
-        $table->integer('priority')->nullable(false)->default(0);
-        $table->integer('executed')->nullable(false)->default(0);
-        $table->dateCreated();        
-        $table->dateColumn('schedule_time');
-        $table->dateColumn('date_executed');   
+        $table->string('module_name')->nullable(true);
         $table->text('config')->nullable(true);
-        $table->string('queue')->nullable(true);
         // indexes         
         $table->unique('name');
-        $table->index('recuring_interval');  
-        $table->index('queue');  
+        $table->index('extension_name');
+        $table->index('module_name');
     }
 
     /**
@@ -59,12 +52,6 @@ class JobsSchema extends Schema
      * @return void
      */
     public function update($table)
-    {   
-        if ($this->hasColumn('config') == false) {
-            $table->text('config')->nullable(true);
-        } 
-        if ($this->hasColumn('queue') == false) {
-            $table->string('queue')->nullable(true);
-        }       
+    {       
     }
 }

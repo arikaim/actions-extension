@@ -25,11 +25,10 @@ class Actions extends Extension
     {
         // Control Panel
         $this->addApiRoute('PUT','/api/admin/actions/start','ActionsControlPanel','start','session'); 
-     
- 
-        // Options
-       // $this->createOption('queue.worker.pid',null); 
-       // $this->createOption('queue.worker.name',null); 
+        $this->addApiRoute('PUT','/api/admin/actions/action/config','ActionsControlPanel','saveConfig','session'); 
+
+        // Create db tables
+        $this->createDbTable('ActionsSchema');                  
     }
     
     /**

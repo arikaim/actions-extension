@@ -1,0 +1,15 @@
+{% set items = [ 
+    { title: labels.view, component: 'actions::admin.actions.view', icon: 'list', active: true },
+    { title: labels.import, component: 'actions::admin.actions.import', icon: 'plus' }, 
+] %}
+
+{{  component('components:tabs.vertical',{ 
+        items: items, 
+        menu: { id: 'actoins_menu' }, 
+        item_class: 'actions-tab-item',
+        content: {
+            id: 'actions_content',
+            component: 'actions::admin.actions.view'
+        } 
+    })
+}}

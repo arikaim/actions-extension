@@ -1,11 +1,11 @@
 {% set items = [ 
-    { id: 'actions_button', title: labels.actions, component: 'actions::admin.actions.view', icon: 'running', active: true },     
+    { id: 'actions_button', title: labels.actions, component: 'actions::admin.actions', icon: 'running', active: true },     
     { id: 'settings_button', title: labels.settings, component: 'actions::admin.settings', icon: 'cog' }  
 ] %}
 
 {{  component('components:tabs',{ 
         items: items,
         menu: { extension: 'actions' },
-        content: { component: 'actions::admin.actions.view' } 
+        content: { component: 'actions::admin.actions' } 
     })
 }}
