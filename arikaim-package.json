@@ -1,0 +1,27 @@
+{
+    "title": "Actions",
+    "name": "actions",
+    "package-type": "extension",
+    "type": "user",
+    "description": "Workflow automation.",
+    "short-description": "Actions",
+    "version": "1.0.0",
+    "private-repository": true,
+    "repository-type": "arikaim",
+    "repository": "arikaim-repository/actions-extension",
+    "position": "2",
+    "features": [     
+    ],
+    "require": {
+        "extensions": [
+            "queue:optional"          
+        ]
+    },
+    "admin-menu": {        
+        "title": "Actions",
+        "page-title": "Actions",
+        "icon": "retweet",
+        "page-icon": "retweet",      
+        "component": "actions::admin"        
+    }
+}

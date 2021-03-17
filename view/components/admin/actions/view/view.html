@@ -1,0 +1,25 @@
+<div class="ui segment">   
+    <div class="p-2">
+        <div class="ui stackable two column grid">      
+            <div class="column">
+                <div class="font-bold p-2">{{ title }}</div>
+            </div>
+            <div class="right aligned column">
+                {{ component('components:paginator.dropdown',{ namespace: 'actions' }) }}
+            </div>
+        </div>
+        <div class="ui divider"></div>
+    </div>
+    <div class="ui two column divided grid">
+        <div class="column">
+            <div class="ui middle aligned divided relaxed list" id="actions_rows" component="actions::admin.actions.view.items">
+                {{ component('actions::admin.actions.view.items') }}
+            </div>
+            <div id="paginator">
+                {{ component('components:paginator',{ namespace: 'actions' }) }}
+            </div>
+        </div>
+        <div class="column" id="job_details">
+        </div>
+    </div>
+</div>
