@@ -25,10 +25,12 @@ class Actions extends Extension
     {
         // Control Panel
         $this->addApiRoute('PUT','/api/admin/actions/start','ActionsControlPanel','start','session'); 
+        $this->addApiRoute('PUT','/api/admin/actions/import','ActionsControlPanel','import','session'); 
         $this->addApiRoute('PUT','/api/admin/actions/action/config','ActionsControlPanel','saveConfig','session'); 
 
         // Create db tables
-        $this->createDbTable('ActionsSchema');                  
+        $this->createDbTable('ActionsSchema');               
+        $this->createDbTable('WorkflowItemsSchema');                  
     }
     
     /**

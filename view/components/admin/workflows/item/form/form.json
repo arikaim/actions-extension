@@ -1,0 +1,13 @@
+{
+    "fields": {
+        "action": {
+            "label": "Action"
+        },
+        "condition": {
+            "label": "Condition"
+        },
+        "settings": {
+            "label": "Settings"
+        }
+    }
+}

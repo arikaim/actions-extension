@@ -9,5 +9,5 @@
 {% endif %}
 
 {% for action in items %}
-    {{ component('queue::admin.jobs.view.item',{ action: action }) }}   
+    {{ component('actions::admin.actions.view.item',{ action: action }) }}   
 {% endfor %}

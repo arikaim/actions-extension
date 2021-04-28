@@ -12,16 +12,16 @@ namespace Arikaim\Extensions\Actions\Models\Schema;
 use Arikaim\Core\Db\Schema;
 
 /**
- * Actions database table schema definition.
+ * Workflow database table schema definition.
  */
-class ActionsSchema extends Schema  
+class WorkflowItemsSchema extends Schema  
 {   
     /**
      * Db table name
      *
      * @var string
      */ 
-    protected $tableName = 'actions';
+    protected $tableName = 'workflow_items';
 
     /**
      * Create table
@@ -34,15 +34,17 @@ class ActionsSchema extends Schema
         // columns
         $table->id();
         $table->prototype('uuid');
-        $table->string('name')->nullable(true);
-        $table->string('handler_class')->nullable(false);      
-        $table->string('package_name')->nullable(true);
-        $table->string('package_type')->nullable(true);
+        $table->userId();
+        $table->status();
+        $table->string('action')->nullable(false);
+        $table->string('condition_type')->nullable(false);      
+        $table->string('condition_value')->nullable(true);   
         $table->text('config')->nullable(true);
-        // indexes         
-        $table->unique('name');
-        $table->unique('handler_class');
-        $table->index('package_name');       
+        $table->dateCreated();
+
+        // indexes              
+        $table->index('condition_type');
+        $table->index('action');       
     }
 
     /**

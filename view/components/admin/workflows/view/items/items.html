@@ -1,0 +1,13 @@
+{% set items = createModel('WorkflowItems','actions').orderBy('name') %}
+{% set items = paginate(items,'workflow') %}
+{% set items = items.getItems() %}
+
+{% if items|length == 0 %}
+    <div class="item">
+        {{ labels.empty }}
+    </div>
+{% endif %}
+
+{% for item in items %}
+    {{ component('actions::admin.workflows.item.details',{ item: item }) }}   
+{% endfor %}

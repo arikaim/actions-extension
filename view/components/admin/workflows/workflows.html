@@ -1,0 +1,14 @@
+{% set items = [ 
+    { title: labels.view, component: 'actions::admin.workflows.view', icon: 'list', active: true }
+] %}
+
+{{  component('components:tabs.vertical',{ 
+        items: items, 
+        menu: { id: 'workflows_menu' }, 
+        item_class: 'workflows-tab-item',
+        content: {
+            id: 'workflows_content',
+            component: 'actions::admin.workflows.view'
+        } 
+    })
+}}

@@ -1,0 +1,9 @@
+{
+    "items": {
+        "scheduled": "Scheduled",
+        "recurring": "Recurring"
+    },
+    "labels": {
+        "select": "Select Condition"
+    }
+}

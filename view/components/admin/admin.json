@@ -1,6 +1,7 @@
 {
     "labels": {       
         "actions": "Actions",
+        "workflows": "Workflows",
         "settings": "Settings"      
     }  
 }

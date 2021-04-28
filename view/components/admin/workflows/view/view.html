@@ -1,0 +1,28 @@
+<div class="ui segment">   
+    <div class="ui stackable grid">      
+        <div class="one wide column">
+            <button class="ui green icon circular button create-action-item" title="{{ labels.create }}">
+                <i class="icon plus"></i>               
+            </button>
+        </div>
+        <div class="four wide column">
+            <div class="font-bold pt-2">{{ title }}</div>
+        </div>
+        <div class="ten wide column">
+
+        </div>
+        <div class="right aligned one wide column">
+            {{ component('components:paginator.dropdown',{ namespace: 'workflow' }) }}
+        </div>
+    </div>
+    <div class="ui divider"></div>
+    <div>
+        <div id="new_workflow_item">
+            test
+        </div>
+        <div class="p-1" id="workflow_items" component="actions::admin.actions.view.items" namespace="workflow">
+            {{ component('actions::admin.workflows.view.items') }}      
+        </div>
+    </div>
+    
+</div>

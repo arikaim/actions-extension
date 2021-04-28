@@ -1,5 +1,5 @@
 <div class="ui segment">   
-    <div class="p-2">
+    <div class="p-1">
         <div class="ui stackable two column grid">      
             <div class="column">
                 <div class="font-bold p-2">{{ title }}</div>
@@ -10,8 +10,8 @@
         </div>
         <div class="ui divider"></div>
     </div>
-    <div class="ui two column divided grid">
-        <div class="column">
+    <div class="ui five column divided grid">
+        <div class="two column">
             <div class="ui middle aligned divided relaxed list" id="actions_rows" component="actions::admin.actions.view.items">
                 {{ component('actions::admin.actions.view.items') }}
             </div>
@@ -19,7 +19,7 @@
                 {{ component('components:paginator',{ namespace: 'actions' }) }}
             </div>
         </div>
-        <div class="column" id="job_details">
+        <div class="three column" id="workflow_content">
         </div>
     </div>
 </div>

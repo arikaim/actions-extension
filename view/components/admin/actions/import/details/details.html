@@ -1,0 +1,26 @@
+{% set extension = package('extension').getPackageProperties(extension_name,true) %}
+<div class="mt-4">
+    <div class="ui list">
+        {% if extension.jobs|length == 0 %}
+            <div class="item">
+                {{ message }}
+            </div>
+        {% endif %}        
+        {% for item in extension.jobs %}
+        <div class="item">
+            <div class="content">                            
+                <i class="icon code blue"></i>          
+                {{ item.base_class }}                 
+            </div>                   
+        </div>
+        {% endfor %}
+    </div>
+    {% if extension.jobs|length > 0 %}
+    <div class="mt-4">
+        <button class="ui basic icon labeled button mini import-actions" package-name="{{ extension_name }}">
+            <i class="icon green plus"></i>
+            {{ labels.import }}
+        </button>
+    </div>
+    {% endif %}
+</div>

@@ -10,7 +10,7 @@
 namespace Arikaim\Extensions\Actions\Controllers;
 
 use Arikaim\Core\Controllers\ControlPanelApiController;
-use Arikaim\Core\Queue\Cron;
+use Arikaim\Core\Db\Model;
 
 /**
  * Actions control panel controler
@@ -28,27 +28,42 @@ class ActionsControlPanel extends ControlPanelApiController
     }
 
     /**
-     * Get queue worker status
+     * Import actions from extension or module package
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
      * @param Validator $data
      * @return Psr\Http\Message\ResponseInterface
     */
-    public function getStatusController($request, $response, $data) 
+    public function importController($request, $response, $data) 
     {         
         $this->onDataValid(function($data) {
-            $name = $data->getSring('name','cron');
-            $manager = $this->get('queue')->createWorkerManager($name);
+            $packageName = $data->getString('package');
+            $type = $data->getString('type','extension');
+            $actions = Model::Actions('actions');
 
-            $running = $manager->isRunning();
+            $packageManager = $this->get('packages')->create($type);
 
-            $this->setResponse(\is_object($manager),function() use($running,$name) {                                
+            $properties = $packageManager->getPackageProperties($packageName,true);
+            $imported = 0;
+            foreach ($properties['jobs'] as $item) {
+                $item['handler_class'] = $item['class'];
+
+                $item['package_name'] = $packageName;
+                $item['package_type'] = $type;
+              
+                $result = $actions->saveAction($item);
+                $imported += ($result == true) ? 1 : 0;
+            }
+
+            exit();
+
+            $this->setResponse(true,function() use($packageName, $imported) {                                
                 $this
-                    ->message('worker.status')
-                    ->field('name',$name)
-                    ->field('running',$running);                                                                                        
-            },'errors.worker.status');
+                    ->message('import')        
+                    ->field('imported',$imported)       
+                    ->field('package',$packageName);                                                                                        
+            },'errors.import');
         });
         $data->validate();        
     }

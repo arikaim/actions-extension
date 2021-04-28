@@ -1,18 +1,18 @@
 {% if uuid is not empty %}
-    {% set action = createModel('Actions','actions').findById(uuid) %}
+    {% set item = createModel('WorkflowItems','actions').findById(uuid) %}
 {% endif %}
-<div class="item" id="row_{{ action.uuid }}">
+<div class="item" id="row_{{ item.uuid }}">
     <div class="content">                      
         <div class="header">
             <i class="icon blue angle right"></i>          
-            <span class="link action-details" uuid="{{ action.uuid }}">
-                {{ action.name }}  
+            <span class="link action-details" uuid="{{ item.uuid }}">
+                {{ item.name }}  
             </span>             
         </div>          
         
         <span class="text-gray-600 pl-16"> 
             <i class="icon code"></i>        
-            {{ action.handler_class }}
+            {{ item.handler_class }}
         </span>         
     </div>     
 </div>

@@ -13,13 +13,17 @@ use Illuminate\Database\Eloquent\Model;
 
 use Arikaim\Core\Db\Traits\Uuid;
 use Arikaim\Core\Db\Traits\Find;
+use Arikaim\Core\Db\Traits\DateCreated;
+use Arikaim\Core\Db\Traits\UserRelation;
 
 /**
- * Actions database model
+ * Workflow items database model
  */
-class Actions extends Model
+class WorkflowItems extends Model
 {
     use Uuid,
+        DateCreated,
+        UserRelation,
         Find;
  
     /**
@@ -28,10 +32,11 @@ class Actions extends Model
      * @var array
     */
     protected $fillable = [
-        'name',
-        'handler_class',      
-        'package_name',
-        'package_type',
+        'action',
+        'user_id',      
+        'condition_type',
+        'condition_value',
+        'status',     
         'config'
     ];
     
@@ -40,7 +45,7 @@ class Actions extends Model
      *
      * @var string
      */
-    protected $table = 'actions';
+    protected $table = 'workflow_items';
 
     /**
      * Disable timestamps
@@ -66,12 +71,9 @@ class Actions extends Model
      * @param array $config
      * @return boolean
      */
-    public function saveActionConfig($id, array $config): bool
+    public function saveConfig($id, array $config): bool
     {
-        $model = $this->findById($id);
-        if (empty($model) == true) {
-            $model = $this->findByColumn($id,'name');
-        }
+        $model = $this->findById($id);      
         if (empty($model) == true) {
             return false;
         }

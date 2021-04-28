@@ -1,0 +1,16 @@
+
+<div class="ui dropdown condition-dropdown {{ class|default('basic button') }}">
+    <div class="text">
+        {{ selected_title }}     
+    </div>
+    <i class="dropdown icon"></i>   
+    <div class="ui menu">
+        {% for key, item in items %}
+            {% if key not in skip %}          
+                <div class="item" data-value="{{ key }}">                        
+                    {{ item }}
+                </div>   
+            {% endif %} 
+        {% endfor %}           
+    </div>
+</div>
