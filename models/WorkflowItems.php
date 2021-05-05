@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Model;
 use Arikaim\Core\Db\Traits\Uuid;
 use Arikaim\Core\Db\Traits\Find;
 use Arikaim\Core\Db\Traits\DateCreated;
-use Arikaim\Core\Db\Traits\UserRelation;
 
 /**
  * Workflow items database model
@@ -23,7 +22,6 @@ class WorkflowItems extends Model
 {
     use Uuid,
         DateCreated,
-        UserRelation,
         Find;
  
     /**
@@ -33,9 +31,10 @@ class WorkflowItems extends Model
     */
     protected $fillable = [
         'action',
-        'user_id',      
+        'workflow_id',      
         'condition_type',
         'condition_value',
+        'date_created',
         'status',     
         'config'
     ];

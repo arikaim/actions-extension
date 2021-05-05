@@ -1,5 +1,6 @@
 {% set items = [ 
-    { title: labels.view, component: 'actions::admin.workflows.view', icon: 'list', active: true }
+    { title: labels.edit, component: 'actions::admin.workflows.editor', icon: 'edit', active: true },
+    { title: labels.create, component: 'actions::admin.workflows.create', icon: 'plus' }
 ] %}
 
 {{  component('components:tabs.vertical',{ 
@@ -8,7 +9,7 @@
         item_class: 'workflows-tab-item',
         content: {
             id: 'workflows_content',
-            component: 'actions::admin.workflows.view'
+            component: 'actions::admin.workflows.editor'
         } 
     })
 }}

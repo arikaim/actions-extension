@@ -1,9 +1,8 @@
 {
     "title": {
-        "content": "Queue Worker Settings",
+        "content": "Settings",
         "icon": "cogs"
     },
-    "labels": {
-        "driver": "Queue Workers"
+    "labels": {       
     }
 }

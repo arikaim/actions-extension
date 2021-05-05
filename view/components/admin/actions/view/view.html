@@ -10,8 +10,8 @@
         </div>
         <div class="ui divider"></div>
     </div>
-    <div class="ui five column divided grid">
-        <div class="two column">
+    <div class="ui two column divided grid">
+        <div class="column">
             <div class="ui middle aligned divided relaxed list" id="actions_rows" component="actions::admin.actions.view.items">
                 {{ component('actions::admin.actions.view.items') }}
             </div>
@@ -19,7 +19,7 @@
                 {{ component('components:paginator',{ namespace: 'actions' }) }}
             </div>
         </div>
-        <div class="three column" id="workflow_content">
+        <div class="column" id="workflow_content">
         </div>
     </div>
 </div>

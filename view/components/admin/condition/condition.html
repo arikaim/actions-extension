@@ -1,7 +1,9 @@
 
-<div class="ui dropdown condition-dropdown {{ class|default('basic button') }}">
+{% set selected_title = items[selected] %}
+<div class="ui dropdown condition-dropdown {{ class|default('basic button') }}"  id="{{ id|default('condition_dropdown') }}">
+    <input name="{{ name|default(id) }}" type="hidden" value="{{ selected }}">  
     <div class="text">
-        {{ selected_title }}     
+        {{ selected_title|default(labels.select) }}     
     </div>
     <i class="dropdown icon"></i>   
     <div class="ui menu">

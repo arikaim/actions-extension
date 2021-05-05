@@ -1,0 +1,17 @@
+<div class="ui segment">   
+    <div class="ui stackable grid">            
+        <div class="four wide column">
+            <span class="font-bold pr-2">{{ title }}</span>
+            {{ component('actions::admin.workflows.dropdown') }}      
+        </div>
+        <div class="ten wide column">
+        </div>
+        <div class="right aligned two wide column">          
+        </div>
+    </div> 
+</div>
+<div id="editor_content">
+    {% if uuid is not empty %}
+        {{ component('actions::admin.workflows.editor.view',{ workflow: uuid }) }}      
+    {% endif %}
+</div>

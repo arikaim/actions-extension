@@ -56,8 +56,6 @@ class ActionsControlPanel extends ControlPanelApiController
                 $imported += ($result == true) ? 1 : 0;
             }
 
-            exit();
-
             $this->setResponse(true,function() use($packageName, $imported) {                                
                 $this
                     ->message('import')        

@@ -1,16 +1,16 @@
 {% set size = size|default(15) %}
-{% set actions = createModel('Actions','actions') %}
+{% set workflows = createModel('Workflows','actions') %}
 {% if selected is not empty %}
-    {% set item_selected = actions.findById(selected) %}
+    {% set item_selected = workflows.findById(selected) %}
 {% endif %}
-{% set items = actions.get() %}
+{% set items = workflows.get() %}
 {% set data_field = data_field|default('uuid') %}
 
-<div class="ui dropdown actions-dropdown {{ class|default('search selection') }}" 
+<div class="ui dropdown workflows-dropdown {{ class|default('search selection') }}" 
     {{ title|attr('title') }} 
     data-field="{{ data_field }}"
-    id="{{ id|default('actions_dropdown') }}">    
-    <input {{ rule|attr('rule') }} name="{{ name|default(id) }}" type="hidden" value="{{ item_selected[data_field] }}">  
+    id="{{ id|default('workflows_dropdown') }}">    
+    <input name="{{ name|default(id) }}" type="hidden" value="{{ item_selected[data_field] }}">  
     <div class="text">
         {{ item_selected.name|default(labels.select) }}
     </div>  
@@ -18,7 +18,7 @@
     <div class="menu">        
         {% for item in items %}
         <div class="item" data-value="{{ item[data_field] }}">  
-            {{ item.name }}
+            {{ item.title }}
         </div>   
         {% endfor %}          
     </div>

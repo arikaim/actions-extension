@@ -1,4 +1,4 @@
-{% set items = createModel('WorkflowItems','actions').orderBy('name') %}
+{% set items = createModel('WorkflowItems','actions').where('workflow_id','=',workflow_id).orderBy('id') %}
 {% set items = paginate(items,'workflow') %}
 {% set items = items.getItems() %}
 
@@ -9,5 +9,5 @@
 {% endif %}
 
 {% for item in items %}
-    {{ component('actions::admin.workflows.item.details',{ item: item }) }}   
+    {{ component('actions::admin.workflows.editor.item.details',{ item: item }) }}   
 {% endfor %}

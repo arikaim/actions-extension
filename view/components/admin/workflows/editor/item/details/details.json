@@ -1,0 +1,10 @@
+{
+    "labels": {
+        "action": "Action",
+        "condition": "Condition",
+        "config": "Config",
+        "name": "Name",
+        "recurring": "Recurring Job",
+        "scheduled": "Scheduled Job"
+    }
+}

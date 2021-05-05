@@ -1,5 +1,6 @@
 {
     "labels": {
-        "view": "View"        
+        "view": "View",
+        "import": "Import"        
     }
 }

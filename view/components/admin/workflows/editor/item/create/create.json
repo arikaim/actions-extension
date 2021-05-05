@@ -1,0 +1,21 @@
+{
+    "title": "Create Action Item",
+    "fields": {
+        "action": {
+            "label": "Action"
+        }             
+    },
+    "steps": {
+        "action": {
+            "title": "Action",
+            "description": "Select workflow action"
+        },
+        "config": {
+            "title": "Config",
+            "description": "Workflow config"
+        }
+    },
+    "labels": {
+        "create": "Create"
+    }
+}

@@ -10,18 +10,20 @@
 namespace Arikaim\Extensions\Actions\Models\Schema;
 
 use Arikaim\Core\Db\Schema;
+use Arikaim\Core\Utils\Uuid;
+use Arikaim\Core\Extension\Extension;
 
 /**
- * Workflow database table schema definition.
+ * Workflows database table schema definition.
  */
-class WorkflowItemsSchema extends Schema  
+class WorkflowsSchema extends Schema  
 {   
     /**
      * Db table name
      *
      * @var string
      */ 
-    protected $tableName = 'workflow_items';
+    protected $tableName = 'workflows';
 
     /**
      * Create table
@@ -34,17 +36,16 @@ class WorkflowItemsSchema extends Schema
         // columns
         $table->id();
         $table->prototype('uuid');
-        $table->relation('workflow_id','workflows');
+        $table->userId();
         $table->status();
-        $table->string('action')->nullable(false);
-        $table->string('condition_type')->nullable(true);      
-        $table->string('condition_value')->nullable(true);   
-        $table->text('config')->nullable(true);
+        $table->string('title')->nullable(false);     
+        $table->slug();   
+        $table->text('note')->nullable(true);
         $table->dateCreated();
 
         // indexes              
-        $table->index('condition_type');
-        $table->index('action');       
+        $table->index('title');
+        $table->index(['title','user_id']);       
     }
 
     /**
@@ -55,5 +56,21 @@ class WorkflowItemsSchema extends Schema
      */
     public function update($table)
     {       
+    }
+
+    /**
+     * Insert or update rows in table
+     *
+     * @param Seed $seed
+     * @return void
+     */
+    public function seeds($seed)
+    {
+        $items = Extension::loadJsonConfigFile('workflows.json','actions');
+       
+        $seed->createFromArray(['title'],$items,function($item) {
+            $item['uuid'] = Uuid::create();          
+            return $item;
+        });
     }
 }

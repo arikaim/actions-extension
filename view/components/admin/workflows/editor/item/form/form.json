@@ -6,8 +6,11 @@
         "condition": {
             "label": "Condition"
         },
-        "settings": {
-            "label": "Settings"
+        "config": {
+            "label": "Config"
         }
+    },
+    "labels": {
+        "add": "Add"
     }
 }

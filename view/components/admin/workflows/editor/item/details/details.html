@@ -1,0 +1,27 @@
+{% if uuid is not empty %}
+    {% set item = createModel('WorkflowItems','actions').findById(uuid) %}
+{% endif %}
+<div class="ui item divided grid" id="row_{{ item.uuid }}">
+    <div class="column">
+        <button class="ui basic mini icon button delete-item" uuid="">
+            <i class="icon orange trash"></i>
+        </button>
+    </div>
+    <div class="four wide column">
+        <h4>{{ labels.action }}</h4>
+        <table class="ui mini very basic definition table">
+            <tbody>
+                <tr>
+                    <td class="right aligned">{{ labels.name }}</td>
+                    <td>{{ item.action }}</td>
+                </tr>
+            </tbody>          
+        </table>
+    </div>
+    <div class="five wide column">
+        <h4>{{ labels.condition }}</h4>
+    </div>
+    <div class="six wide column">
+        <h4>{{ labels.config }}</h4>
+    </div>    
+</div>

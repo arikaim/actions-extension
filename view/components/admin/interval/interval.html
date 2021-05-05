@@ -6,11 +6,11 @@
     {% endfor %}
 {% endif %}
 
-{% set selected_title = selected_title|default(labels.empty) %}
-
-<div class="ui dropdown interval-dropdown {{ class }}">
+<div class="ui dropdown interval-dropdown {{ class|default('basic button selection') }}" 
+    id="{{ id|default('interval_dropdown') }}">
+    <input name="{{ name|default(id) }}" type="hidden" value="{{ selected }}">  
     <div class="text">
-        {{ selected_title }}     
+        {{ selected_title|default(labels.select) }}     
     </div>
     <i class="dropdown icon"></i>   
     <div class="ui menu">

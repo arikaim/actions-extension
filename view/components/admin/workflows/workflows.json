@@ -1,6 +1,7 @@
 {
     "labels": {
-        "view": "View",
+        "edit": "Edit",
+        "create": "Create",
         "import": "Import"
     }
 }

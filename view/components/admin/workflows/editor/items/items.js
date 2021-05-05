@@ -1,7 +1,7 @@
 'use strict';
 
 arikaim.component.onLoaded(function() {
-    safeCall('actionsView',function(obj) {
+    safeCall('workflowEditorView',function(obj) {
         obj.initRows();
     },true);   
 });
