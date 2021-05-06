@@ -1,30 +1,29 @@
-<div class="ui grid">
-    <div class="two wide column">
-        <div class="ui vertical fluid tiny steps">
-            <div class="active step workflow-step" id="action_select">             
-                <div class="content">
-                    <div class="title">{{ steps.action.title }}</div>
-                    <div class="description">{{ steps.action.description }}</div>
-                </div>
-            </div>
-            <div class="step workflow-step" id="action_config">              
-                <div class="content">
-                    <div class="title">{{ steps.config.title }}</div>
-                    <div class="description">{{ steps.config.description }}</div>
-                </div>
-            </div>
-        </div>    
+<div class="ui divided grid">
+             
+    <div class="four wide column">
+        <h4 class="ui header ">{{ title }}</h4>    
+        <div class="ui divider"></div>
+        <div class="four wide column" id="action_select_config">   
+            <form class="ui form {{ class }}" id="workflow_item_form">  
+                <input type="hidden" name="workflow" id="workflow" value="{{ workflow }}">
+                <div class="field">
+                    <label>{{ fields.action.label }}</label>
+                    {{ component('actions::admin.actions.dropdown',{ rule: 'empty', name: 'action' }) }} 
+                </div>       
+                {{ component('components:form.footer',{ button_title: labels.create }) }}   
+            </form>
+        </div>
     </div>
-    <div class="four wide column" id="action_select_config">       
-        <form class="ui form {{ class }}" id="workflow_item_form">  
-            <input type="hidden" name="workflow" id="workflow" value="{{ workflow }}">
-            <div class="field">
-                <label>{{ fields.action.label }}</label>
-                {{ component('actions::admin.actions.dropdown',{ rule: 'empty', name: 'action' }) }} 
-            </div>       
-            {{ component('components:form.footer',{ button_title: labels.create }) }}   
-        </form>           
+    <div class="six wide column">
+        <h4 class="ui header">{{ steps.condition.title }}</h4>
+        <div class="ui divider"></div>
+        <div class="six wide column" id="condition_content">
+        </div> 
     </div>
-    <div class="ten wide column" id="action_config_content">
-    </div> 
+    <div class="six wide column">
+        <h4 class="ui header">{{ steps.config.title }}</h4>
+        <div class="ui divider"></div>
+        <div class="six wide column" id="action_config_content">
+        </div> 
+    </div>                     
 </div>

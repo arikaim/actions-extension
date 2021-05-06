@@ -2,5 +2,11 @@
     "title": "Workflow",
     "labels": { 
         "create": "Create Action"      
+    },
+    "messages": {
+        "delete": {
+            "title": "Confirm Delete",
+            "content": "Delete workflow action item."
+        }
     }
 }

@@ -10,6 +10,8 @@ function WorkflowEditorView() {
     var self = this;
 
     this.init = function() {     
+        this.loadMessages('actions::admin.workflows.editor');
+
         paginator.init('workflow_rows',"actions::admin.workflows.editor.items",'workflow'); 
 
         $('.workflows-dropdown').dropdown({
@@ -34,8 +36,18 @@ function WorkflowEditorView() {
     };
 
     this.initRows = function() {
+        
         arikaim.ui.button('.delete-item',function(element) {
-            var uuid = $(element).attr('uuid');            
+            var uuid = $(element).attr('uuid'); 
+            
+            return modal.confirmDelete({ 
+                title: self.getMessage('delete.title'),
+                description: self.getMessage('delete.content')
+            },function() {
+                workflowEditor.delete(uuid,function(result) {
+                    arikaim.ui.table.removeRow('#row_' + uuid);     
+                });
+            });                 
         });
     };
 }

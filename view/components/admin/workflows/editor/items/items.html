@@ -9,5 +9,5 @@
 {% endif %}
 
 {% for item in items %}
-    {{ component('actions::admin.workflows.editor.item.details',{ item: item }) }}   
+    {{ component('actions::admin.workflows.editor.item.details',{ item: item, index: loop.index }) }}   
 {% endfor %}

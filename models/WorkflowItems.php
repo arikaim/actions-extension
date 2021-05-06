@@ -11,6 +11,7 @@ namespace Arikaim\Extensions\Actions\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Arikaim\Extensions\Actions\Models\Actions;
 use Arikaim\Core\Db\Traits\Uuid;
 use Arikaim\Core\Db\Traits\Find;
 use Arikaim\Core\Db\Traits\DateCreated;
@@ -30,7 +31,7 @@ class WorkflowItems extends Model
      * @var array
     */
     protected $fillable = [
-        'action',
+        'action_id',
         'workflow_id',      
         'condition_type',
         'condition_value',
@@ -80,25 +81,15 @@ class WorkflowItems extends Model
         return (bool)$model->update([
             'config' => \json_encode($config)
         ]);
-    }
-
+    }   
+    
     /**
-     * Create or update action
+     * Action relation
      *
-     * @param array $data
-     * @return boolean
+     * @return Relation|null
      */
-    public function saveAction(array $data): bool
+    public function action()
     {
-        $name = $data['name'] ?? null;
-        $handlerClass = $data['handler_class'] ?? null;
-        if (empty($name) == true || empty($handlerClass) == true) {
-            return false;
-        }
-
-        $model = $this->findByColumn($handlerClass,'handler_class');
-        $result = (\is_object($model) == true) ? $model->update($data) : $this->create($data);
-
-        return (\is_object($result) == true) ? true : (bool)$result;
+        return $this->belongsTo(Actions::class,'action_id');
     }
 }

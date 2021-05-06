@@ -1,5 +1,5 @@
 {
-    "title": "Create Action Item",
+    "title": "New Action Item",
     "fields": {
         "action": {
             "label": "Action"
@@ -9,6 +9,10 @@
         "action": {
             "title": "Action",
             "description": "Select workflow action"
+        },
+        "condition": {
+            "title": "Condition",
+            "description": "Workflow Condition"
         },
         "config": {
             "title": "Config",

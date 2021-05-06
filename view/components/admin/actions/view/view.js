@@ -31,7 +31,7 @@ function ActionsView() {
             var uuid = $(element).attr('uuid');
             
             return arikaim.page.loadContent({
-                id: 'job_details',           
+                id: 'action_details',           
                 component: 'actions::admin.actions.details',
                 params: { uuid: uuid }            
             });  

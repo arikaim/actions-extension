@@ -11,6 +11,7 @@ namespace Arikaim\Extensions\Actions\Controllers;
 
 use Arikaim\Core\Controllers\ControlPanelApiController;
 use Arikaim\Core\Db\Model;
+use Arikaim\Core\Interfaces\ConfigPropertiesInterface;
 
 /**
  * Actions control panel controler
@@ -51,7 +52,12 @@ class ActionsControlPanel extends ControlPanelApiController
 
                 $item['package_name'] = $packageName;
                 $item['package_type'] = $type;
-              
+
+                // create job action 
+                $job = $this->get('queue')->create($item['handler_class']);
+                $config = ($job instanceof ConfigPropertiesInterface) ? $job->createConfigProperties() : [];
+                $item['config'] = \json_encode($config);
+
                 $result = $actions->saveAction($item);
                 $imported += ($result == true) ? 1 : 0;
             }

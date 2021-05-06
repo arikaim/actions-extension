@@ -1,46 +1,44 @@
-{% set action = createModel('Actions','actions').findById(uuid) %}
-{% set config = createProperties(job.config) %}
-<div>
-    <h4>{{ title }}</h4>
-    
-    <div class="mt-2">
-        <table class="ui very basic definition table">
-            <thead>
-                <tr>
-                    <th class="two wide"></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="right aligned">{{ labels.id }}</td>
-                    <td>{{ job.uuid }}</td>
-                </tr>
-                <tr>
-                    <td class="right aligned">{{ labels.name }}</td>
-                    <td>
-                        {{ job.name }}
-                    </td>
-                </tr>               
-                <tr>
-                    <td class="right aligned">{{ labels.handler }}</td>
-                    <td>
-                        {{ job.handler_class }}
-                    </td>
-                </tr>
-                <tr>
-                    <td class="right aligned">{{ labels.extension }}</td>
-                    <td>
-                        {{ job.extension_name}}
-                    </td>
-                </tr>    
-               
-            </tbody>  
-        </table>     
-    </div>
-    <div class="mt-2" id="job_config_content">
-        {% if config is iterable %}
-            {{ component('actions::admin.actions.config.view',{ config: config, uuid: job.uuid }) }}                
-        {% endif %}
-    </div>
+{% if uuid is not empty %}
+    {% set action = createModel('Actions','actions').findById(uuid) %}
+{% endif %}
+{% set config = createProperties(action.config) %}
+
+{% if hide_title != true %}
+<h4>{{ title }}</h4>    
+{% endif %}
+<div class="mt-2">
+    <table class="ui very basic definition table {{ table_class }}">           
+        <tbody>
+            <tr>
+                <td class="right aligned">{{ labels.id }}</td>
+                <td>{{ action.uuid }}</td>
+            </tr>
+            <tr>
+                <td class="right aligned">{{ labels.name }}</td>
+                <td>
+                    {{ action.name }}
+                </td>
+            </tr>               
+            <tr>
+                <td class="right aligned">{{ labels.handler }}</td>
+                <td>
+                    {{ action.handler_class }}
+                </td>
+            </tr>
+            <tr>
+                <td class="right aligned">{{ labels.package }}</td>
+                <td>
+                    {{ action.package_name}}
+                </td>
+            </tr>    
+        </tbody>  
+    </table>     
 </div>
+{% if hide_config != true %}
+<div class="mt-2" id="action_config_content">
+    {% if config|length > 0 %}
+        <h4 class="ui header">{{ labels.config }}</h4>
+        {{ component('components:properties.view',{ properties: config }) }}                
+    {% endif %}
+</div>
+{% endif %}

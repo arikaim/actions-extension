@@ -56,5 +56,4 @@ class Workflows extends Model
      * @var boolean
      */
     public $timestamps = false;
-
 }
