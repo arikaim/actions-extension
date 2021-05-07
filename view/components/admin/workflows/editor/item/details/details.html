@@ -1,15 +1,26 @@
 {% if uuid is not empty %}
     {% set item = createModel('WorkflowItems','actions').findById(uuid) %}
 {% endif %}
-{% set config = createProperties(item.config) %}
-<div class="ui item divided grid" id="row_{{ item.uuid }}">
+<div class="ui item divided grid row-{{ item.uuid }}" id="row_{{ item.uuid }}">
     <div class="column">
-        <div class="ui basic label">
+        <div class="ui basic fluid center aligned text-center label">
             {{ index }}
         </div>
-        <button class="ui basic mini icon button delete-item" uuid="{{ item.uuid }}">
-            <i class="icon orange trash"></i>
-        </button>
+        <div class="ui divider"></div>
+        <div class="ui vertical basic mini buttons fluid">
+            <button class="ui  button delete-item" uuid="{{ item.uuid }}">
+                <i class="icon orange trash"></i>
+                {{ buttons.delete.label }}
+            </button>
+            {% if item.job_id is empty %}
+            <button class="ui button push-queue-button" uuid="{{ item.uuid }}" title="{{ buttons.push.hint }}">
+                <i class="icon blue plus"></i>
+                {{ buttons.push.label }}
+            </button>
+            {% else %}
+
+            {% endif %}
+        </div>
     </div>
     <div class="four wide column">
         <h4>
@@ -17,20 +28,16 @@
         </h4>      
         {{ component('actions::admin.actions.details',{ action: item.action.first(), hide_title: true }) }}        
     </div>
-    <div class="five wide column">
+    <div class="five wide column" >
         <h4>
             {{ labels.condition }}
             <button class="ui basic icon mini button edit-item-condition right floated" uuid="{{ item.uuid }}">
                 <i class="icon blue edit"></i>         
             </button>
         </h4>
-        {% if condition_type == 'scheduled' %}
-        
-        {% elseif condition_type == 'recurring' %}
-        
-        {% elseif condition_type is empty %}
-        ..
-        {% endif %}
+        <div id="condition_content_{{ item.uuid }}">
+            {{ component('actions::admin.workflows.editor.item.condition',{ item: item }) }} 
+        </div>       
     </div>
     <div class="six wide column">
         <h4>
@@ -39,8 +46,11 @@
                 <i class="icon blue edit"></i>         
             </button>
         </h4>    
-        {% if config|length > 0 %}  
-            {{ component('components:properties.view',{ properties: config }) }} 
-        {% endif %}
-    </div>    
+        <div id="config_content_{{ item.uuid }}">
+            {{ component('actions::admin.workflows.editor.item.config',{ item: item }) }}           
+        </div>
+    </div>       
 </div>
+<div class="ui horizontal divider row-{{ item.uuid }}">
+    <i class="icon circle outline mini blue"></i>
+</div> 

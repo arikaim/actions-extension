@@ -34,10 +34,13 @@ class Actions extends Extension
         $this->addApiRoute('PUT','/api/admin/actions/workflow/status','WorkflowsControlPanel','setStatus','session'); 
         // workflow editor
         $this->addApiRoute('POST','/api/admin/actions/workflow/editor/add','WorkflowEditorControlPanel','createItem','session');   
-        $this->addApiRoute('PUT','/api/admin/actions/workflow/editor/update','WorkflowEditorControlPanel','updateItem','session');       
+        $this->addApiRoute('PUT','/api/admin/actions/workflow/editor/update','WorkflowEditorControlPanel','updateItem','session'); 
+        $this->addApiRoute('PUT','/api/admin/actions/workflow/editor/condition','WorkflowEditorControlPanel','updateCondition','session'); 
+        $this->addApiRoute('PUT','/api/admin/actions/workflow/editor/config','WorkflowEditorControlPanel','updateConfig','session');      
         $this->addApiRoute('DELETE','/api/admin/actions/workflow/editor/delete/{uuid}','WorkflowEditorControlPanel','deleteItem','session');     
         $this->addApiRoute('PUT','/api/admin/actions/workflow/editor/status','WorkflowEditorControlPanel','setStatus','session'); 
-
+        $this->addApiRoute('PUT','/api/admin/actions/workflow/editor/job','WorkflowEditorControlPanel','pushActionJob','session'); 
+      
         // Create db tables
         $this->createDbTable('ActionsSchema');     
         $this->createDbTable('WorkflowsSchema');               

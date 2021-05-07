@@ -36,7 +36,8 @@ class WorkflowItemsSchema extends Schema
         $table->prototype('uuid');
         $table->relation('workflow_id','workflows');
         $table->status();
-        $table->relation('action_id','actions');   
+        $table->relation('action_id','actions');  
+        $table->integer('job_id')->nullable(true);    
         $table->string('condition_type')->nullable(true);      
         $table->string('condition_value')->nullable(true);   
         $table->text('config')->nullable(true);

@@ -1,9 +1,27 @@
-<form class="ui form {{ class|default('fluid') }}" id="condition_form">      
-    <div class="field">
-        <label>{{ fields.condition.label }}</label>
-        {{ component('actions::admin.condition',{ class: 'basic button fluid' }) }}   
+{% if uuid is not empty %}
+    {% set item = createModel('WorkflowItems','actions').findById(uuid) %}
+{% endif %}
+
+{% if item.condition_type == 'scheduled' %}
+    <div class="ui header mini">
+        <i class="icon blue outline calendar"></i>
+        <div class="content">
+            {{ labels.schedule }}
+            <div class="descripton">
+                {{ item.condition_value|dateTimeFormat }}
+            </div>         
+        </div>
     </div>
-    <div class="field" id="condition_content">                
-    </div>        
-    {{ component('components:form.footer',{ button_title: labels.add }) }}   
-</form>
+{% elseif item.condition_type == 'recurring' %}
+    <div class="ui mini header">
+        <i class="sync alternate icon blue"></i>
+        <div class="content">
+            {{ labels.recurring }}
+            <div class="descripton">
+                {{ item.condition_value }}
+            </div>
+        </div>
+    </div>
+{% elseif item.condition_type is empty %}
+..
+{% endif %}

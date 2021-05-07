@@ -1,0 +1,19 @@
+{% if uuid is not empty %}
+    {% set item = createModel('WorkflowItems','actions').findById(uuid) %}
+{% endif %}
+{% set config = createProperties(item.config) %}
+
+{% if config is iterable %}
+    <div class="p-1">
+        {% if show_title == true %}
+            <h4>{{ title }}</h4>
+        {% endif %}   
+        <form class="ui form {{ disabled }}" id="config_form">   
+            <input type="hidden" name="uuid" value="{{ uuid }}" id="uuid">                                                            
+            {{ component('components:properties.fields',{ properties: config }) }}   
+            {% if demo_mode != true %}
+                {{ component('components:form.footer',{ show_cancel_button: true }) }}    
+            {% endif %}      
+        </form>  
+    </div>
+{% endif %}

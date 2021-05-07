@@ -1,0 +1,17 @@
+{% if uuid is not empty %}
+    {% set item = createModel('WorkflowItems','actions').findById(uuid) %}
+{% endif %}
+{% set config = createProperties(item.config) %}
+
+{% if config|length > 0  %}
+    {% if show_title == true %}
+    <h4>{{ title }}</h4>
+    {% endif %}   
+    <div>
+        {{ component('components:properties.view',{ properties: config }) }} 
+    </div>      
+{% else %}
+    <div>
+        ...
+    </div>    
+{% endif %}

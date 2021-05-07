@@ -1,10 +1,21 @@
 {
     "labels": {
+       
         "action": "Action",
         "condition": "Condition",
         "config": "Config",
         "name": "Name",
         "recurring": "Recurring Job",
         "scheduled": "Scheduled Job"
+    },
+    "buttons": {
+        "push": {
+            "label": "Push",
+            "hint": "Push to Queue"
+        },
+        "delete": {
+            "label": "Delete",
+            "hint": "Delete workflow item"
+        }
     }
 }

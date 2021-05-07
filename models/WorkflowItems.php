@@ -35,6 +35,7 @@ class WorkflowItems extends Model
         'workflow_id',      
         'condition_type',
         'condition_value',
+        'job_id',
         'date_created',
         'status',     
         'config'
@@ -66,14 +67,14 @@ class WorkflowItems extends Model
     
     /**
      * Save action config
-     *
-     * @param string|int $id
+     *   
      * @param array $config
+     * @param string|int|null $id
      * @return boolean
      */
-    public function saveConfig($id, array $config): bool
+    public function saveConfig(array $config, $id = null): bool
     {
-        $model = $this->findById($id);      
+        $model = (empty($id) == true) ? $this : $this->findById($id);      
         if (empty($model) == true) {
             return false;
         }
@@ -91,5 +92,5 @@ class WorkflowItems extends Model
     public function action()
     {
         return $this->belongsTo(Actions::class,'action_id');
-    }
+    }   
 }

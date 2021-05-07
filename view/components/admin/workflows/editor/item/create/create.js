@@ -1,6 +1,10 @@
 'use strict';
 
 arikaim.component.onLoaded(function() {
+    arikaim.ui.button('.cancel-button',function(element) {
+        $('#new_workflow_item').html('');
+    });
+
     arikaim.ui.form.onSubmit("#workflow_item_form",function() {  
         return workflowEditor.add('#workflow_item_form');
     },function(result) { 

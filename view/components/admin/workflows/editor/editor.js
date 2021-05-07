@@ -29,6 +29,22 @@ function WorkflowEditor() {
         return arikaim.put('/api/admin/actions/workflow/editor/status',data,onSuccess,onError);          
     };   
 
+    this.updateCondition = function(data, onSuccess, onError) {
+        return arikaim.put('/api/admin/actions/workflow/editor/condition',data,onSuccess,onError);          
+    };
+
+    this.updateConfig = function(data, onSuccess, onError) {
+        return arikaim.put('/api/admin/actions/workflow/editor/config',data,onSuccess,onError);          
+    };
+
+    this.pushActionJob = function(uuid, onSuccess, onError) {
+        var data = {
+            uuid: uuid
+        };
+        
+        return arikaim.put('/api/admin/actions/workflow/editor/job',data,onSuccess,onError);          
+    };
+
     this.init = function() {     
         $('.workflows-dropdown').dropdown({
             onChange: function(value) {
