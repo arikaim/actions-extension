@@ -7,7 +7,7 @@
  * @license     http://www.arikaim.com/license
  * 
 */
-namespace Arikaim\Extensions\Arcade\Jobs;
+namespace Arikaim\Extensions\Actions\Jobs;
 
 use Arikaim\Core\Queue\Jobs\ScheduledJob;
 use Arikaim\Core\Collection\Traits\ConfigProperties;
@@ -44,6 +44,10 @@ class ActionScheduledJob extends ScheduledJob implements JobInterface, Scheduled
     public function execute()
     {
         $config = $this->getConfigProperties();  
+
+        print_r($config);
+        exit();
+        
         $jobClass = '';
         
     }

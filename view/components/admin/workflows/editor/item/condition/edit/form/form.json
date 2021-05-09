@@ -1,0 +1,14 @@
+{
+    "fields": {
+        "schedule": {
+            "label": "Schedule Time",
+            "placeholder": "Select date"
+        },
+        "recurring": {
+            "label": "Recurring"
+        },
+        "type": {
+            "label": "Type"
+        }
+    }
+}

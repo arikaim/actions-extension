@@ -140,7 +140,11 @@ class WorkflowEditorControlPanel extends ControlPanelApiController
             $config->setPropertyValues($data->toArray());
 
             $result = $item->saveConfig($config->toArray());
-            
+            if ($result == true && empty($item->job_id) == false) {
+                // update job config in queue
+                $this->get('queue')->saveJobConfig($item->job_id,$config->toArray());
+            }
+
             $this->setResponse($result,function() use($uuid) {                                
                 $this
                     ->message('editor.item_config')                             
@@ -171,7 +175,11 @@ class WorkflowEditorControlPanel extends ControlPanelApiController
             }
             // delete item
             $result = $item->delete();
-
+            if ($result !== false && empty($item->job_id) == false) {
+                // delete job form queue
+                $this->get('queue')->deleteJob($item->job_id);
+            }
+            
             $this->setResponse($result,function() use($uuid) {                                
                 $this
                     ->message('editor.create')                             
@@ -201,16 +209,20 @@ class WorkflowEditorControlPanel extends ControlPanelApiController
                 return false;
             }
 
-           // print_r($item->toArray());
-
-            $job = $this->get('queue')->create($item->action->handler_class);    
+            //
+            $job = $this->get('queue')->create('ActionScheduledJob','actions');
             $job->setName($item->action->name);
+            $properties = PropertiesFactory::createFromArray($item->config);           
+            $properties->property('job_class',[
+                'value' => $item->action->handler_class,
+                'type'  => 'text'
+            ]);
 
             $recuringInterval = ($item->condition_type == 'recurring') ? $item->condition_value : null;
             $scheduleTime = ($item->condition_type == 'scheduled') ? $item->condition_value : null;
            
             // add job
-            $result = $this->get('queue')->addJob($job,null,false,$recuringInterval,$scheduleTime,$item->config);
+            $result = $this->get('queue')->addJob($job,null,false,$recuringInterval,$scheduleTime,$properties->toArray());
          
             // update job id in workflow item
             $job = $this->get('queue')->getJob($item->action->name);

@@ -20,13 +20,13 @@
             {% else %}
 
             {% endif %}
-        </div>
+        </div>     
     </div>
     <div class="four wide column">
         <h4>
             {{ labels.action }}           
         </h4>      
-        {{ component('actions::admin.actions.details',{ action: item.action.first(), hide_title: true }) }}        
+        {{ component('actions::admin.actions.details',{ action: item.action, hide_title: true, hide_config: true }) }}        
     </div>
     <div class="five wide column" >
         <h4>

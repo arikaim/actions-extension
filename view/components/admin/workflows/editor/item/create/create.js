@@ -20,10 +20,20 @@ arikaim.component.onLoaded(function() {
 
         arikaim.page.loadContent({
             id: 'condition_content',           
-            component: 'actions::admin.workflows.editor.item.condition',
+            component: 'actions::admin.workflows.editor.item.condition.form',
             params: { 
                 uuid: result.uuid                           
             }            
+        },function(result) {
+            arikaim.ui.form.onSubmit("#condition_form",function() {  
+                return workflowEditor.updateCondition('#condition_form');
+            },function(result) { 
+                return arikaim.page.loadContent({
+                    id: 'action_config_content',           
+                    component: 'actions::admin.workflows.editor.item.condition',
+                    params: { uuid: result.uuid }            
+                }); 
+            });
         });  
     });
 });
