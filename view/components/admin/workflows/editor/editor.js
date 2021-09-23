@@ -50,7 +50,7 @@ function WorkflowEditor() {
             onChange: function(value) {
                 return arikaim.page.loadContent({
                     id: 'editor_content',           
-                    component: 'actions::admin.workflows.editor.view',
+                    component: 'actions::admin.workflows.view',
                     params: { uuid: value }            
                 });  
             }

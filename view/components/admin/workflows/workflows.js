@@ -7,8 +7,6 @@
 'use strict';
 
 function ContorlPanelWorkflows() {
-
-   
 }
 
 var workflows = new ContorlPanelWorkflows();

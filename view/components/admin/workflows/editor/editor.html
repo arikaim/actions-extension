@@ -12,6 +12,6 @@
 </div>
 <div id="editor_content">
     {% if uuid is not empty %}
-        {{ component('actions::admin.workflows.editor.view',{ workflow: uuid }) }}      
+        {{ component('actions::admin.workflows.view',{ workflow: uuid }) }}      
     {% endif %}
 </div>

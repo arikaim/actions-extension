@@ -56,4 +56,40 @@ class Workflows extends Model
      * @var boolean
      */
     public $timestamps = false;
+
+    /**
+     * Find workflow
+     *
+     * @param string $slug
+     * @return Model|null
+     */
+    public function findWorkflow(string $slug)
+    {
+        $model = $this->findBySlug($slug);
+        if (\is_object($model) == false) { 
+            $model = $this->findById($slug);
+        }
+
+        return $model;
+    } 
+
+    /**
+     * Save or update workflow
+     *
+     * @param string $slug
+     * @param array $data
+     * @return boolean
+     */
+    public function saveWorkflow(string $slug, array $data): bool
+    {
+        $model = $this->findWorkflow($slug);
+        if (\is_object($model) == true) {
+            return (bool)$model->update($data); 
+        }
+        $data['slug'] = $slug;
+        $data['title'] = (empty($data['title']) == true) ?  $data['slug'] : $data['title'];
+        $created = $this->create($data);
+
+        return \is_object($created);
+    }
 }

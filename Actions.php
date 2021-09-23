@@ -44,7 +44,10 @@ class Actions extends Extension
         // Create db tables
         $this->createDbTable('ActionsSchema');     
         $this->createDbTable('WorkflowsSchema');               
-        $this->createDbTable('WorkflowItemsSchema');                  
+        $this->createDbTable('WorkflowItemsSchema');  
+        
+        // Services
+        $this->registerService('Actions');                
     }
     
     /**

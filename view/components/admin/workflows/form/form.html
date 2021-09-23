@@ -2,7 +2,7 @@
     {% set workflow = createModel('Workflows','actions').findById(uuid) %} 
 {% endif %}
 
-<form class="ui equal width form" id="city_form">  
+<form class="ui equal width form" id="workflow_form">  
     <input type="hidden" name="uuid" id="uuid" value="{{ uuid }}">    
     <div class="field required">
         <label>{{ fields.title.label }}</label>

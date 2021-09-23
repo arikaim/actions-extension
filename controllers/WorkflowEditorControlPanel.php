@@ -209,26 +209,40 @@ class WorkflowEditorControlPanel extends ControlPanelApiController
                 return false;
             }
 
-            //
-            $job = $this->get('queue')->create('ActionScheduledJob','actions');
-            $job->setName($item->action->name);
+            // add job to queue
+            $jobName = $item->action->name;
+            if ($this->get('queue')->has($jobName) == true) {
+                $jobName .= '-' . (string)$item->id;
+            }
+           
+            if ($item->condition_type == 'recurring') {
+                $job = $this->get('queue')->create('ActionRecurringJob','actions');
+                $recuringInterval = $item->condition_value;
+                $job->setRecurringInterval($recuringInterval);
+                $scheduleTime = null;
+            }
+            if ($item->condition_type == 'scheduled') {
+                $job = $this->get('queue')->create('ActionScheduledJob','actions');
+                $scheduleTime =  $item->condition_value;
+                $job->setScheduleTime($scheduleTime);
+                $recuringInterval = null;
+            }
+           
+            $job->setName($jobName);
             $properties = PropertiesFactory::createFromArray($item->config);           
             $properties->property('job_class',[
                 'value' => $item->action->handler_class,
                 'type'  => 'text'
             ]);
-
-            $recuringInterval = ($item->condition_type == 'recurring') ? $item->condition_value : null;
-            $scheduleTime = ($item->condition_type == 'scheduled') ? $item->condition_value : null;
-           
+ 
             // add job
             $result = $this->get('queue')->addJob($job,null,false,$recuringInterval,$scheduleTime,$properties->toArray());
          
-            // update job id in workflow item
-            $job = $this->get('queue')->getJob($item->action->name);
-            $item->update(['job_id' => $job['id']]);
-
-            $this->setResponse($result,function() use($uuid) {                                
+            $this->setResponse($result,function() use($uuid, $jobName, $item) {   
+                // update job id in workflow item
+                $job = $this->get('queue')->getJob($jobName);
+                $item->update(['job_id' => $job['id']]);
+                
                 $this
                     ->message('editor.push_job')                             
                     ->field('uuid',$uuid);                                                                                                      

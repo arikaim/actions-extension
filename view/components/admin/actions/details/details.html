@@ -7,7 +7,7 @@
 <h4>{{ title }}</h4>    
 {% endif %}
 <div class="mt-2">
-    <table class="ui very basic definition table {{ table_class }}">           
+    <table class="ui very basic definition table {{ table_class|default('mini') }}">           
         <tbody>
             <tr>
                 <td class="right aligned">{{ labels.id }}</td>

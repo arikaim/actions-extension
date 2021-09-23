@@ -27,13 +27,14 @@ class ActionScheduledJob extends ScheduledJob implements JobInterface, Scheduled
 
     /**
      * Constructor
-     *
+     *  
      * @param string|null $extension
-     * @param string|null $name    
+     * @param string|null $name
+     * @param array $params
      */
-    public function __construct(?string $extension = null, ?string $name = null)
+    public function __construct(?string $extension,?string $name = null, array $params = [])
     {
-        parent::__construct($extension,$name);
+        parent::__construct($extension,$name,$params);       
     }
 
     /**
@@ -44,12 +45,15 @@ class ActionScheduledJob extends ScheduledJob implements JobInterface, Scheduled
     public function execute()
     {
         $config = $this->getConfigProperties();  
+ 
+        $jobClass = $config->getValue('job_class');
+        $job = new $jobClass($this->getExtensionName(),$this->getName(),$this->params);
 
-        print_r($config);
-        exit();
-        
-        $jobClass = '';
-        
+        if ($job instanceof ConfigPropertiesInterface) {
+            $job->setConfigProperties($config);
+        }
+
+        return $job->execute();
     }
 
     /**
