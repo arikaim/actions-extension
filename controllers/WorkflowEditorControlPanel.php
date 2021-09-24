@@ -42,6 +42,11 @@ class WorkflowEditorControlPanel extends ControlPanelApiController
         $this->onDataValid(function($data) {
             $uuid = $data->getString('workflow');
             $action = $data->getString('action',null);
+            $type = $data->get('type');
+            $scheduleTime = $data->get('schedule_time');
+            $recurringInterval = $data->get('recurring_interval');
+            $conditionValue = ($type == 'recurring') ? $recurringInterval : DateTime::toTimestamp($scheduleTime);
+
             $workflow = Model::Workflows('actions')->findById($uuid);
             if (\is_object($workflow) == false) {
                 $this->error('Not valid workflow uuid.');
@@ -56,10 +61,12 @@ class WorkflowEditorControlPanel extends ControlPanelApiController
             $workflowItems = Model::WorkflowItems('actions');
 
             $item = $workflowItems->create([
-                'action_id'   => $actions->id,
-                'workflow_id' => $workflow->id,
-                'user_id'     => $this->getUserId(),
-                'config'      => \json_encode($actions->config)
+                'action_id'       => $actions->id,
+                'workflow_id'     => $workflow->id,
+                'user_id'         => $this->getUserId(),
+                'condition_type'  => $type,
+                'condition_value' => $conditionValue,
+                'config'          => \json_encode($actions->config)
             ]);
 
             $this->setResponse(\is_object($item),function() use($uuid,$item) {                                

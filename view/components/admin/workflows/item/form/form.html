@@ -1,0 +1,21 @@
+<form class="ui form {{ class }}" id="workflow_item_form">  
+    <input type="hidden" name="workflow" id="workflow" value="{{ workflow }}">
+    <div class="field">
+        <label>{{ fields.action.label }}</label>
+        {{ component('actions::admin.actions.dropdown',{ rule: 'empty', name: 'action' }) }} 
+    </div>    
+    <div class="two fields">
+        <div class="field">
+            {{  component('actions::admin.condition.radio',{ 
+                    class: 'basic button fluid',
+                    name: 'type', 
+                    selected: item.condition_type 
+                }) 
+            }}  
+        </div>
+        <div class="field" id="condition_content">
+
+        </div>         
+    </div>
+    {{ component('components:form.footer',{ button_title: labels.create, show_cancel_button: true }) }}   
+</form>

@@ -1,0 +1,19 @@
+{% set workflow = createModel('Workflows','actions').findById(uuid) %}
+<div class="ui segment">      
+    <div class="flex flex-row flex-grow">
+        <div class="w-12">
+            <button class="ui green icon circular mini button create-action-item" title="{{ labels.create }}" workflow="{{ uuid }}">
+                <i class="icon plus"></i>               
+            </button>
+        </div>      
+        <div class="w-full" id="new_workflow_item">
+        </div>
+    </div>    
+</div>     
+<div class="flex flex-row items-start">
+    <div class="w-74 flex-grow hidden" id="item_edit_content">
+    </div>
+    <div class="pl-2 ml-2 w-full flex-grow pt-4" id="workflow_items" component="actions::admin.workflows.editor.items" namespace="workflow">
+        {{ component('actions::admin.workflows.view.items',{ workflow_id: workflow.id }) }}      
+    </div>     
+</div>

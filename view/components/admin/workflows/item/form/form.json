@@ -1,0 +1,20 @@
+{
+    "title": "New Action Item",
+    "fields": {       
+        "action": {
+            "label": "Action",
+            "description": "Select workflow action"
+        },
+        "condition": {
+            "label": "Condition",
+            "description": "Workflow Condition"
+        },
+        "config": {
+            "label": "Config",
+            "description": "Workflow config"
+        }                  
+    },
+    "labels": {
+        "create": "Create"
+    }
+}

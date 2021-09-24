@@ -1,0 +1,21 @@
+<div class="grouped fields">
+    <label>{{ label }}</label>
+    <div class="field">
+        <div class="ui radio checkbox condition-checkbox" id="scheduled_condition">
+            <input type="radio" name="condition" value="scheduled">
+            <label class="px-1">{{ items.scheduled }}</label>
+        </div>
+    </div>
+    <div class="field">
+        <div class="ui radio checkbox condition-checkbox" id="recurring_condition">
+            <input type="radio" name="condition" value="recurring">
+            <label class="px-1">{{ items.recurring }}</label>
+        </div>
+    </div>
+    <div class="field">
+        <div class="ui radio checkbox condition-checkbox" id="event_condition">
+            <input type="radio" name="condition" value="event">
+            <label class="px-1">{{ items.event }}</label>
+        </div>
+    </div>
+</div>

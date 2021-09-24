@@ -1,0 +1,34 @@
+{% if uuid is not empty %}
+    {% set item = createModel('WorkflowItems','actions').findById(uuid) %}
+{% endif %}
+{% if item.condition_type == 'scheduled' %}
+    {% set schedule_date = item.condition_value|dateTimeFormat %}
+{% else %}
+    {% set recurring_interval = item.condition_value %}
+{% endif %}
+<form class="ui form {{ class|default('fluid') }}" id="condition_form">  
+    <input type="hidden" id="uuid" name="uuid" value="{{ uuid }}">    
+    <div class="field">
+        <label>{{ fields.type.label }}</label>
+        {{  component('actions::admin.condition',{ 
+                class: 'basic button fluid',
+                name: 'type', 
+                selected: item.condition_type 
+            }) 
+        }}   
+    </div>
+    <div class="seven wide field condition-type scheduled-type {{ (item.condition_type == 'scheduled') ? '': 'hidden' }}">           
+        <label>{{ fields.schedule.label }}</label>
+        <div class="ui calendar schedule-date" data-type="datetime" data-date="{{ schedule_date }}">      
+            <div class="ui input left icon">
+                <i class="calendar icon"></i>
+                <input value="{{ item.condition_value }}" type="text" placeholder="{{ fields.schedule.placeholder }}" name="schedule_time" id="schedule_time">
+            </div>
+        </div>  
+    </div>        
+    <div class="seven wide field condition-type recurring-type {{ (item.condition_type == 'recurring') ? '': 'hidden' }}">
+        <label>{{ fields.recurring.label }}</label>
+        {{ component('actions::admin.interval',{ name: 'recurring_interval', selected: recurring_interval  }) }} 
+    </div>   
+    {{ component('components:form.footer',{ button_title: labels.add, show_cancel_button: true }) }}   
+</form>

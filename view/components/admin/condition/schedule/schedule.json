@@ -1,0 +1,8 @@
+{
+    "field": {
+        "schedule": {
+            "label": "Schedule Time",
+            "placeholder": "Select date"
+        }
+    }
+}
