@@ -1,10 +1,13 @@
 <form class="ui form {{ class }}" id="workflow_item_form">  
+    <input type="hidden" name="uuid" id="uuid" value="{{ item.uuid }}">
     <input type="hidden" name="workflow" id="workflow" value="{{ workflow }}">
+    {% if hide_action != true %}
     <div class="field">
         <label>{{ fields.action.label }}</label>
         {{ component('actions::admin.actions.dropdown',{ rule: 'empty', name: 'action' }) }} 
     </div>    
-    <div class="two fields">
+    {% endif %}
+    <div class="three fields">
         <div class="field">
             {{  component('actions::admin.condition.radio',{ 
                     class: 'basic button fluid',
@@ -13,8 +16,18 @@
                 }) 
             }}  
         </div>
-        <div class="field" id="condition_content">
-
+        <div class="twelve wide field fluid" id="condition_content">
+            {% if item.condition_type == 'scheduled' %}
+                {{  component('actions::admin.condition.schedule',{ 
+                        condition_value: item.condition_value,
+                        schedule_date: item.condition_value|dateTimeFormat
+                    }) 
+                }}
+            {% elseif item.condition_type == 'recurring'  %}
+                {{ component('actions::admin.condition.recurring',{ recurring_interval: item.condition_value }) }}
+            {% else %}
+            ..
+            {% endif %}
         </div>         
     </div>
     {{ component('components:form.footer',{ button_title: labels.create, show_cancel_button: true }) }}   

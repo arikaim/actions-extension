@@ -32,8 +32,5 @@
             "interval": "0 0 1 1 *",
             "title": "Every Year"           
         }
-    ],
-    "labels": {
-        "select": "Select"
-    }   
+    ]   
 }

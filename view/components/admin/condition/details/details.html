@@ -18,7 +18,7 @@
         <div class="content">
             {{ labels.recurring }}
             <div class="descripton">
-                {{ item.condition_value }}
+                {{ component('actions::admin.interval.label',{ interval: item.condition_value }) }}               
             </div>
         </div>
     </div>

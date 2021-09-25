@@ -36,7 +36,7 @@
         </h4>      
         <div class="pl-8">
             {{ item.action.name }}  
-        </div>          
+        </div>                 
     </div>
     <div class="five wide column">
         <h4>
@@ -45,7 +45,7 @@
                 <i class="icon blue edit"></i>         
             </button>
         </h4>
-        <div id="condition_content_{{ item.uuid }}"> 
+        <div id="condition_content_{{ item.uuid }}">            
             {{ component('actions::admin.condition.details',{ item: item }) }}   
         </div>       
     </div>

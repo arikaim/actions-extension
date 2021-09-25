@@ -54,9 +54,11 @@ function WorkflowEditorView() {
         arikaim.ui.button('.edit-item-condition',function(element) {
             var uuid = $(element).attr('uuid');
 
+            $('#item_edit_content').removeClass('hidden');
+            
             return arikaim.page.loadContent({
-                id: 'condition_content_' + uuid,           
-                component: 'actions::admin.workflows.editor.item.condition.edit',
+                id: 'item_edit_content',           
+                component: 'actions::admin.workflows.item.edit',
                 params: { uuid: uuid }            
             });  
         });

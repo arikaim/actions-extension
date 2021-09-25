@@ -25,7 +25,13 @@ arikaim.component.onLoaded(function() {
     });
     $('#event_condition').checkbox({
         onChecked: function() {
-           console.log('event');
+            arikaim.page.loadContent({
+                id: 'condition_content',           
+                component: 'actions::admin.condition.event',
+                params: {
+                    
+                }            
+            }); 
         }
     });
 });

@@ -1,0 +1,19 @@
+{% if uuid is not empty %}
+    {% set item = createModel('WorkflowItems','actions').findById(uuid) %}
+{% endif %}
+<div class="ui ten wide segment grid">             
+    <div class="column">
+        <h4 class="bg-gray-100 p-4">
+            <i class="icon blue edit"></i>
+            {{ title }}
+        </h4>           
+        <div class="mt-6">   
+            {{  component('actions::admin.workflows.item.form',{ 
+                    uuid: item.uuid,
+                    hide_action: true, 
+                    item: item 
+                }) 
+            }}            
+        </div>       
+    </div>                   
+</div>
