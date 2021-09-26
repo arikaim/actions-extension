@@ -73,6 +73,7 @@ class WorkflowEditorControlPanel extends ControlPanelApiController
                 $this
                     ->message('editor.create')                             
                     ->field('workflow',$uuid)
+                    ->field('workflow_id',$item->workflow_id)
                     ->field('action_id',$item->action_id)
                     ->field('uuid',$item->uuid);                                                                                        
             },'errors.import');

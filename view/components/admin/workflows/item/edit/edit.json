@@ -1,3 +1,6 @@
 {
-    "title": "Edit"    
+    "title": "Edit",
+    "labels": {
+        "save": "Save"
+    }   
 }

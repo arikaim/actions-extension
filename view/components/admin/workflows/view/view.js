@@ -36,6 +36,24 @@ function WorkflowEditorView() {
         });
     };
 
+    this.loadConditionDetails = function(uuid) {
+        return arikaim.page.loadContent({
+            id: 'condition_content_' + uuid,           
+            component: 'actions::admin.condition.details',
+            params: { uuid: uuid }            
+        });  
+    };
+
+    this.loadItems = function(workflowId) {
+        return arikaim.page.loadContent({
+            id: 'workflow_items',           
+            component: 'actions::admin.workflows.view.items',
+            params: { 
+                workflow_id: workflowId 
+            }            
+        });
+    };
+
     this.initRows = function() {
         
         arikaim.ui.button('.delete-item',function(element) {
@@ -53,7 +71,6 @@ function WorkflowEditorView() {
 
         arikaim.ui.button('.edit-item-condition',function(element) {
             var uuid = $(element).attr('uuid');
-
             $('#item_edit_content').removeClass('hidden');
             
             return arikaim.page.loadContent({
@@ -65,10 +82,11 @@ function WorkflowEditorView() {
 
         arikaim.ui.button('.edit-item-config',function(element) {
             var uuid = $(element).attr('uuid');
- 
+            $('#item_edit_content').removeClass('hidden');
+
             return arikaim.page.loadContent({
-                id: 'config_content_' + uuid,           
-                component: 'actions::admin.workflows.editor.item.config.edit',
+                id: 'item_edit_content',           
+                component: 'actions::admin.workflows.item.config.edit',
                 params: { uuid: uuid }            
             });  
         });

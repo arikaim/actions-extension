@@ -1,6 +1,11 @@
-<div class="p-1">
-    {% if show_title == true %}
-        <h4>{{ title }}</h4>
-    {% endif %}   
-    {{ component('actions::admin.workflows.editor.item.config.edit.form',{ uuid: uuid, item: item }) }}
+<div class="ui ten wide segment grid">             
+    <div class="column">
+        <h4 class="bg-gray-100 p-4">
+            <i class="icon blue cogs"></i>
+            {{ title }}
+        </h4>           
+        <div class="mt-6">   
+            {{ component('actions::admin.workflows.item.config.edit.form',{ uuid: uuid, item: item }) }}           
+        </div>       
+    </div>                   
 </div>

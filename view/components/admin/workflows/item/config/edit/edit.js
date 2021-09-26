@@ -1,14 +1,9 @@
 'use strict';
 
 arikaim.component.onLoaded(function() {
-    arikaim.ui.button('.cancel-button',function(element) {
-        var uuid = $('#uuid').val();
 
-        return arikaim.page.loadContent({
-            id: 'config_content_' + uuid,           
-            component: 'actions::admin.workflows.editor.item.config',
-            params: { uuid: uuid }            
-        });  
+    arikaim.ui.button('.cancel-button',function(element) {
+        workflowEditor.hideEditPanel();  
     });
 
     arikaim.ui.form.onSubmit("#config_form",function() {  

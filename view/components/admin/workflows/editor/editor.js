@@ -45,6 +45,11 @@ function WorkflowEditor() {
         return arikaim.put('/api/admin/actions/workflow/editor/job',data,onSuccess,onError);          
     };
 
+    this.hideEditPanel = function hideEditPanel() {
+        $('#item_edit_content').html('');
+        $('#item_edit_content').addClass('hidden');
+    }
+
     this.init = function() {     
         $('.workflows-dropdown').dropdown({
             onChange: function(value) {

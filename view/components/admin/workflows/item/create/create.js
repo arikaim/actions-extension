@@ -11,6 +11,8 @@ arikaim.component.onLoaded(function() {
     arikaim.ui.form.onSubmit("#workflow_item_form",function() {  
         return workflowEditor.add('#workflow_item_form');
     },function(result) { 
-              
+        arikaim.page.toastMessage(result.message);      
+        workflowEditor.hideEditPanel(); 
+        workflowEditorView.loadItems(result.workflow_id);
     });
 });

@@ -3,7 +3,7 @@
         "status": "Status",
         "action": "Action",
         "condition": "Condition",
-        "config": "Config",
+        "settings": "Settings",
         "name": "Name",
         "recurring": "Recurring Job",
         "scheduled": "Scheduled Job"

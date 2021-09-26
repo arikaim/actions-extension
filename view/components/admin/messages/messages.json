@@ -1,8 +1,12 @@
 {
-    "jobs": {
-        "config": "Job config saved successfully.", 
-        "status": "Job status changed successfully."
+    "action": {
+        "config": "Action config saved successfully.", 
+        "status": "Action status changed successfully."
     },
+    "editor": {
+        "create": "Action item crated successfully.",
+        "update_condition": "Condition updated successfully."
+    },   
     "errors": {             
         "config": "Error saving job config"   
     },
