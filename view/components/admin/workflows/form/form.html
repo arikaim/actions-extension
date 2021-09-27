@@ -6,7 +6,7 @@
     <input type="hidden" name="uuid" id="uuid" value="{{ uuid }}">    
     <div class="field required">
         <label>{{ fields.title.label }}</label>
-        <input type="text" name="title" id="title" {{ fields.title.placeholder|attr('placeholder') }} value="{{ workflow.title }}">  
+        <input rule="empty" type="text" name="title" id="title" {{ fields.title.placeholder|attr('placeholder') }} value="{{ workflow.title }}">  
     </div> 
     <div class="field">
         <label>{{ fields.note.label }}</label>

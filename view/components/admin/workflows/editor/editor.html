@@ -2,7 +2,7 @@
     <div class="ui stackable grid">            
         <div class="four wide column">
             <span class="font-bold pr-2">{{ title }}</span>
-            {{ component('actions::admin.workflows.dropdown') }}      
+            {{ component('actions::admin.workflows.dropdown',{ selected: uuid }) }}      
         </div>
         <div class="ten wide column">
         </div>

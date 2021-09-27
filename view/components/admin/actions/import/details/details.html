@@ -1,5 +1,8 @@
 {% set extension = package('extension').getPackageProperties(extension_name,true) %}
 <div class="mt-4">
+    <div class="ui horizontal mini divider header">
+        {{ labels.jobs }}
+    </div>
     <div class="ui list">
         {% if extension.jobs|length == 0 %}
             <div class="item">
@@ -15,10 +18,12 @@
         </div>
         {% endfor %}
     </div>
+    <div class="p-2" id="import_details">
+    </div>
     {% if extension.jobs|length > 0 %}
     <div class="mt-4">
-        <button class="ui basic icon labeled button mini import-actions" package-name="{{ extension_name }}">
-            <i class="icon green plus"></i>
+        <button class="ui icon labeled green button mini import-actions" package-name="{{ extension_name }}">
+            <i class="icon plus"></i>
             {{ labels.import }}
         </button>
     </div>

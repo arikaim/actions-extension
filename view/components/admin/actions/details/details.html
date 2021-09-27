@@ -35,10 +35,14 @@
     </table>     
 </div>
 {% if hide_config != true %}
-<div class="mt-2" id="action_config_content">
-    {% if config|length > 0 %}
-        <h4 class="ui header">{{ labels.config }}</h4>
-        {{ component('components:properties.view',{ properties: config }) }}                
+<div class="mt-6" id="action_config_content">
+    {% if config|length > 0 %}        
+        {{  component('components:properties.view',{ 
+                title: labels.config, 
+                table_class: 'mini', 
+                properties: config 
+            }) 
+        }}                
     {% endif %}
 </div>
 {% endif %}

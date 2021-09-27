@@ -4,7 +4,14 @@
         <h4>
             {{ labels.extension }}
         </h4>        
-        {{ component("system:admin.extensions.dropdown",{ selected: extension, class: 'fluid' }) }} 
+        <div class="flex flex-rows items-center">
+            <div class="w-1/2 flex-grow">
+                {{ component("system:admin.extensions.dropdown",{ selected: extension, class: 'fluid' }) }} 
+            </div>
+            <div class="w-1/2 flex-grow">
+
+            </div>
+        </div>      
     </div>
     <div class="mt-2" id="import-details">
     </div>

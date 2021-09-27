@@ -14,16 +14,6 @@ function WorkflowEditorView() {
 
         paginator.init('workflow_rows',"actions::admin.workflows.editor.items",'workflow'); 
 
-        $('.workflows-dropdown').dropdown({
-            onChange: function(value) {
-                return arikaim.page.loadContent({
-                    id: 'editor_content',           
-                    component: 'actions::admin.workflows.editor.view',
-                    params: { uuid: value }            
-                });  
-            }
-        });
-
         arikaim.ui.button('.create-action-item',function(element) {
             var workflow = $(element).attr('workflow');
             $('#item_edit_content').removeClass('hidden');

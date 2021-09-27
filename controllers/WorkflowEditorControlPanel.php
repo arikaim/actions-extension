@@ -42,7 +42,7 @@ class WorkflowEditorControlPanel extends ControlPanelApiController
         $this->onDataValid(function($data) {
             $uuid = $data->getString('workflow');
             $action = $data->getString('action',null);
-            $type = $data->get('type');
+            $type = $data->get('condition');
             $scheduleTime = $data->get('schedule_time');
             $recurringInterval = $data->get('recurring_interval');
             $conditionValue = ($type == 'recurring') ? $recurringInterval : DateTime::toTimestamp($scheduleTime);

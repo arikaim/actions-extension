@@ -1,9 +1,14 @@
 {
+    "import": "Actions import successfully.",
+    "workflow": {
+        "add": "Workflow created successfully."
+    },
     "action": {
         "config": "Action config saved successfully.", 
         "status": "Action status changed successfully."
     },
     "editor": {
+        "item_config": "Settings saved successfully.",
         "create": "Action item crated successfully.",
         "update_condition": "Condition updated successfully."
     },   
@@ -13,7 +18,7 @@
     "messages": {
         "remove": {
             "title": "Confirm Remove",
-            "content": "Confirm remove job '<b><% title %></b>'."
+            "content": "Confirm remove item '<b><% title %></b>'."
         }        
     }
 }

@@ -15,7 +15,7 @@
     ],
     "require": {
         "extensions": [
-            "queue:optional"          
+            "queue"          
         ]
     },
     "admin-menu": {        

@@ -1,0 +1,11 @@
+{
+    "buttons": {
+        "push": {
+            "label": "Push",
+            "hint": "Push to Queue"
+        }       
+    },
+    "labels": {
+        "job": "Job Status"
+    }
+}

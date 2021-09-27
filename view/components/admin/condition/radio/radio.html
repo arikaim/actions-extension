@@ -1,5 +1,7 @@
 <div class="grouped fields">
-    <label>{{ label }}</label>
+    {% if label is not empty %}
+    <label {{ class|attr('class') }} >{{ label }}</label>
+    {% endif %}
     <div class="field">
         <div class="ui radio checkbox condition-checkbox" id="scheduled_condition">
             <input type="radio" name="condition" value="scheduled" {{ (selected == 'scheduled') ? 'checked': '' }}>

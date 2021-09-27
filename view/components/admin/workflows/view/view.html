@@ -1,7 +1,9 @@
-{% set workflow = createModel('Workflows','actions').findById(uuid) %}
+{% if uuid is not empty %}
+    {% set workflow = createModel('Workflows','actions').findById(uuid) %}
+{% endif %}
 <div class="ui segment">      
     <div class="flex flex-row flex-grow">
-        <div class="w-12">
+        <div class="w-12">           
             <button class="ui green icon circular mini button create-action-item" title="{{ labels.create }}" workflow="{{ uuid }}">
                 <i class="icon plus"></i>               
             </button>

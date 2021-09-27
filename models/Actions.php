@@ -96,6 +96,7 @@ class Actions extends Model
         }
 
         $model = $this->findByColumn($handlerClass,'handler_class');
+        
         $result = (\is_object($model) == true) ? $model->update($data) : $this->create($data);
 
         return (\is_object($result) == true) ? true : (bool)$result;

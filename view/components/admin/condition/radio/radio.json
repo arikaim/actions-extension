@@ -3,6 +3,5 @@
         "scheduled": "Scheduled",
         "recurring": "Recurring",
         "event": "Event"
-    },
-    "label": "Condition"       
+    }     
 }

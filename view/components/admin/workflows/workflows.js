@@ -7,6 +7,10 @@
 'use strict';
 
 function ContorlPanelWorkflows() {
+
+    this.add = function(formId, onSuccess, onError) {
+        return arikaim.post('/api/admin/actions/workflow/add',formId,onSuccess,onError);       
+    };
 }
 
 var workflows = new ContorlPanelWorkflows();

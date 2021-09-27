@@ -47,22 +47,22 @@ class ActionsControlPanel extends ControlPanelApiController
 
             $properties = $packageManager->getPackageProperties($packageName,true);
             $imported = 0;
+
             foreach ($properties['jobs'] as $item) {
                 $item['handler_class'] = $item['class'];
-
                 $item['package_name'] = $packageName;
                 $item['package_type'] = $type;
-
                 // create job action 
                 $job = $this->get('queue')->create($item['handler_class']);
+            
                 $config = ($job instanceof ConfigPropertiesInterface) ? $job->createConfigProperties() : [];
                 $item['config'] = \json_encode($config);
-
+              
                 $result = $actions->saveAction($item);
                 $imported += ($result == true) ? 1 : 0;
             }
 
-            $this->setResponse(true,function() use($packageName, $imported) {                                
+            $this->setResponse(true,function() use($packageName,$imported) {                                
                 $this
                     ->message('import')        
                     ->field('imported',$imported)       
