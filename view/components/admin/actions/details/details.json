@@ -5,6 +5,6 @@
         "name": "Name",
         "handler": "Handler", 
         "config": "Config",
-        "package": "Package"           
+        "extension": "Extension"           
     }
 }

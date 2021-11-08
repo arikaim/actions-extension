@@ -239,8 +239,10 @@ class WorkflowEditorControlPanel extends ControlPanelApiController
             $job->setName($jobName);
             $properties = PropertiesFactory::createFromArray($item->config);           
             $properties->property('job_class',[
-                'value' => $item->action->handler_class,
-                'type'  => 'text'
+                'value'    => $item->action->handler_class,
+                'type'     => 'text',
+                'title'    => 'Job Class',
+                'readonly' => true
             ]);
  
             // add job

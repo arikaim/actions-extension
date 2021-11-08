@@ -4,7 +4,7 @@
     { id: 'settings_button', title: labels.settings, component: 'actions::admin.settings', icon: 'cog' }  
 ] %}
 
-{{  component('components:tabs',{ 
+{{  component('semantic~tabs',{ 
         items: items,
         menu: { extension: 'actions' },
         content: { component: 'actions::admin.actions' } 

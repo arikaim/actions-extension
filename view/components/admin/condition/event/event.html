@@ -1,8 +1,8 @@
 <div class="field condition-type event-type">
     <label>{{ field.event.label }}</label>
-    {{  component('actions::admin.interval',{ 
-            name: 'recurring_interval', 
-            selected: recurring_interval  
+    {{  component('system:admin.system.events.dropdown',{           
+            selected: event_name,
+            class: 'search basic button fluid'  
         }) 
     }} 
 </div>  
