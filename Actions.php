@@ -24,9 +24,9 @@ class Actions extends Extension
     public function install()
     {
         // Control Panel
-        $this->addApiRoute('PUT','/api/admin/actions/start','ActionsControlPanel','start','session'); 
         $this->addApiRoute('PUT','/api/admin/actions/import','ActionsControlPanel','import','session'); 
         $this->addApiRoute('PUT','/api/admin/actions/action/config','ActionsControlPanel','saveConfig','session'); 
+        $this->addApiRoute('PUT','/api/admin/actions/action/settings','ActionsControlPanel','saveSettings','session'); 
         // workflows 
         $this->addApiRoute('POST','/api/admin/actions/workflow/add','WorkflowsControlPanel','create','session');   
         $this->addApiRoute('PUT','/api/admin/actions/workflow/update','WorkflowsControlPanel','update','session');       
@@ -40,7 +40,12 @@ class Actions extends Extension
         $this->addApiRoute('DELETE','/api/admin/actions/workflow/editor/delete/{uuid}','WorkflowEditorControlPanel','deleteItem','session');     
         $this->addApiRoute('PUT','/api/admin/actions/workflow/editor/status','WorkflowEditorControlPanel','setStatus','session'); 
         $this->addApiRoute('PUT','/api/admin/actions/workflow/editor/job','WorkflowEditorControlPanel','pushActionJob','session'); 
-      
+        
+        // Api 
+        $this->addApiRoute('PUT','/api/actions/run','ActionsApi','run',['public','token']); 
+        $this->addApiRoute('POST','/api/actions/run','ActionsApi','run',['public','token']); 
+        $this->addApiRoute('GET','/api/actions/run','ActionsApi','run',['public','token']); 
+        
         // Create db tables
         $this->createDbTable('ActionsSchema');     
         $this->createDbTable('WorkflowsSchema');               

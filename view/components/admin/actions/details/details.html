@@ -4,36 +4,60 @@
 {% set config = createProperties(action.config) %}
 
 {% if hide_title != true %}
-<h4>{{ title }}</h4>    
+    {{ component('semantic~segment-title',{ title: title, icon: 'info', close_button: true }) }}    
 {% endif %}
-<div class="mt-2">
-    <table class="ui very basic definition table {{ table_class|default('mini') }}">           
-        <tbody>
-            <tr>
-                <td class="right aligned">{{ labels.id }}</td>
-                <td>{{ action.uuid }}</td>
-            </tr>
-            <tr>
-                <td class="right aligned">{{ labels.name }}</td>
-                <td>
-                    {{ action.name }}
-                </td>
-            </tr>               
-            <tr>
-                <td class="right aligned">{{ labels.handler }}</td>
-                <td>
-                    {{ action.handler_class }}
-                </td>
-            </tr>
-            <tr>
-                <td class="right aligned">{{ labels.extension }}</td>
-                <td>
-                    {{ action.package_name}}
-                </td>
-            </tr>    
-        </tbody>  
-    </table>     
-</div>
+
+<table class="ui very basic definition table {{ table_class|default('mini') }}">           
+    <tbody>
+        <tr>
+            <td class="right aligned">{{ labels.id }}</td>
+            <td>{{ action.uuid }}</td>
+        </tr>
+        <tr>
+            <td class="right aligned">{{ labels.name }}</td>
+            <td>
+                {{ action.name }}
+            </td>
+        </tr>               
+        <tr>
+            <td class="right aligned">{{ labels.handler }}</td>
+            <td>
+                {{ action.handler_class }}
+            </td>
+        </tr>
+        <tr>
+            <td class="right aligned">{{ labels.extension }}</td>
+            <td>
+                {{ action.package_name}}
+            </td>
+        </tr>  
+        <tr>
+            <td class="right aligned">{{ labels.http }}</td>
+            <td>
+                {% if action.allow_http_execution == true %}
+                    <div class="ui mini basic label green">
+                        {{ labels.on }}
+                    </div>
+                {% else %}
+                    <div class="ui mini basic label green">
+                        {{ labels.off }}
+                    </div>
+                {% endif %}
+            </td>
+        </tr>    
+        {% if action.secret is not empty %}
+        <tr>
+            <td class="right aligned">
+                {{ labels.secret }}
+            </td>
+            <td>
+               {{ action.secret }}
+            </td>
+        </tr>    
+        {% endif %}
+    </tbody>  
+</table>     
+
 {% if hide_config != true %}
 <div class="mt-6" id="action_config_content">
     {% if config|length > 0 %}        

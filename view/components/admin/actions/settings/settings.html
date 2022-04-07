@@ -1,0 +1,30 @@
+{% if uuid is not empty %}
+    {% set action = createModel('Actions','actions').findById(uuid) %} 
+{% endif %}
+{{ component('semantic~segment-title',{ title: title, icon: 'info', close_button: true }) }}  
+<div class="mt-2">
+    <div class="px-1 flex flex-rows items-center">
+        <div class="font-bold"> {{ labels.name }}</div>
+        <div class="px-2">
+            {{ action.name }}
+        </div>
+    </div>
+    <div class="mt-2 px-1">
+        <form class="ui equal width form" id="action_settings_form">  
+            <input type="hidden" name="uuid" id="uuid" value="{{ uuid }}">   
+            <div class="two fields">
+                {{  component('semantic~form.fields.checkbox',{ 
+                        field_label: fields.http.label,
+                        name: 'allow_http_execution',
+                        value: action.allow_http_execution 
+                    }) 
+                }}
+                <div class="field">
+                    <label>{{ fields.secret.label }}</label>
+                    <input  type="text" name="secret" id="secret" {{ fields.secret.placeholder|attr('placeholder') }} value="{{ action.secret }}">  
+                </div>                        
+            </div>
+            {{ component('semantic~form.footer') }}   
+        </form>
+    </div>
+</div>

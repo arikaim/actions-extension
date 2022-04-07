@@ -71,4 +71,36 @@ class ActionsControlPanel extends ControlPanelApiController
         });
         $data->validate();        
     }
+
+    /**
+     * Action save settings
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param Validator $data
+     * @return Psr\Http\Message\ResponseInterface
+    */
+    public function saveSettingsController($request, $response, $data) 
+    {         
+        $this->onDataValid(function($data) {
+            $uuid = $data->get('uuid');
+            $action = Model::Actions('actions')->findAction($uuid);
+            if (\is_object($action) == false) {
+                $this->error('Not valid action id');
+                return false;
+            }
+
+            $result = $action->update([
+                'secret'               => $data->get('secret'),
+                'allow_http_execution' => $data->get('allow_http_execution')
+            ]);
+
+            $this->setResponse(($result !== false),function() use($action) {                                
+                $this
+                    ->message('action.settings')        
+                    ->field('uuid',$action->uuid);                                                                                                         
+            },'errors.settings');
+        });
+        $data->validate();        
+    }
 }

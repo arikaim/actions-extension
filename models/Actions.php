@@ -32,6 +32,8 @@ class Actions extends Model
         'handler_class',      
         'package_name',
         'package_type',
+        'allow_http_execution',
+        'secret',
         'config'
     ];
     
@@ -59,6 +61,12 @@ class Actions extends Model
         return (empty($this->attributes['config']) == true) ? [] : \json_decode($this->attributes['config'],true);
     }
     
+    public function findAction($key)
+    {
+        $model = $this->findByColumn($key,'name');
+        return (\is_object($model) == true) ? $model : $this->findById($key);
+    }
+
     /**
      * Save action config
      *

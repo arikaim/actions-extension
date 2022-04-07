@@ -5,6 +5,7 @@
     },
     "action": {
         "config": "Action config saved successfully.", 
+        "settings": "Action settings saved successfully.",
         "status": "Action status changed successfully."
     },
     "editor": {

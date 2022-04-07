@@ -1,0 +1,17 @@
+{
+    "title": "Action Settings",
+    "labels": {
+        "id": "Id",
+        "name": "Name"
+    },
+    "fields": {
+        "secret": {
+            "label": "Secret",
+            "placeholder": "Enter secret"      
+        },
+        "http": {
+            "label": "Allow run with http request",
+            "placeholder": ""      
+        }       
+    }   
+}

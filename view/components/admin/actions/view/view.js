@@ -23,16 +23,21 @@ function ActionsView() {
         });  
     };
 
-    this.initDetails = function() {  
-    };
-
     this.initRows = function() {
         arikaim.ui.button('.action-details',function(element) {
-            var uuid = $(element).attr('uuid');
-            
+            var uuid = $(element).attr('uuid'); 
             return arikaim.page.loadContent({
                 id: 'action_details',           
                 component: 'actions::admin.actions.details',
+                params: { uuid: uuid }            
+            });  
+        });
+
+        arikaim.ui.button('.action-settings',function(element) {
+            var uuid = $(element).attr('uuid'); 
+            return arikaim.page.loadContent({
+                id: 'action_details',           
+                component: 'actions::admin.actions.settings',
                 params: { uuid: uuid }            
             });  
         });
