@@ -55,6 +55,25 @@
             </td>
         </tr>    
         {% endif %}
+        {% if action.allow_http_execution == true %}
+        <tr>
+            <td class="right aligned">
+                <div class="ui basic label">GET</div>
+            </td>
+            <td>
+               {{ url('/api/actions/run?name=' ~ action.name,true) }}
+            </td>
+        </tr>   
+        <tr>
+            <td class="right aligned">
+                <div class="ui basic label">POST</div>
+                <div class="ui basic label">PUT</div>
+            </td>
+            <td>
+               {{ url('/api/actions/run',true) }}
+            </td>
+        </tr>   
+        {% endif %}
     </tbody>  
 </table>     
 
