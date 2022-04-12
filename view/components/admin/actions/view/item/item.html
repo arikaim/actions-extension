@@ -15,7 +15,15 @@
                 class="ui mini compact button basic icon action-details" 
                 title="{{ labels.details }}">
                 <i class="icon blue info"></i>
-            </button>                  
+            </button>       
+            {% if action.allow_http_execution == true %}  
+            <button 
+                uuid="{{ action.uuid }}"
+                class="ui mini compact button basic icon action-docs" 
+                title="{{ labels.details }}">
+                <i class="icon blue atlas"></i>
+            </button>    
+            {% endif %}         
             <span>
                 {{ action.name }}  
             </span>             

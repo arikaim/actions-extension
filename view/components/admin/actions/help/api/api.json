@@ -1,0 +1,14 @@
+{
+    "title": "Rest Api Docs",
+    "labels": {
+        "id": "Id",
+        "name": "Action Name",
+        "on": "On",
+        "off": "Off",
+        "secret": "Secret",
+        "handler": "Handler", 
+        "config": "Config",
+        "http": "Run with http request",
+        "extension": "Extension"           
+    }
+}

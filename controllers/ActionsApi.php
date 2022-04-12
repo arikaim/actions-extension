@@ -71,6 +71,8 @@ class ActionsApi extends ApiController
         }
 
         $jobResult = $job->execute();
+        // get result as array
+        $jobResult = (\is_object($jobResult) == true) ? $jobResult->toArray() : $jobResult;
         $jobResult = (\is_array($jobResult) == false) ? [$jobResult] : $jobResult;
         $error = $jobResult['error'] ?? null;
 

@@ -1,51 +1,50 @@
 {% if uuid is not empty %}
     {% set item = createModel('WorkflowItems','actions').findById(uuid) %}
 {% endif %}
-<div class="ui item divided grid row-{{ item.uuid }}" id="row_{{ item.uuid }}">
-    <div class="column">
-        <div class="pb-2">
-            <div class="ui basic center aligned text-center label">
-                <span class="font-bold">{{ index }}</span>           
+<div class="ui segment">
+    <div class="ui streched   grid row-{{ item.uuid }}" id="row_{{ item.uuid }}">
+        <div class="column">
+            <div class="pb-2">
+                <div class="ui basic center aligned text-center label">
+                    <span class="font-bold">{{ index }}</span>           
+                </div>
+                <button class="ui basic mini compact  right floated button icon delete-item" uuid="{{ item.uuid }}" title="{{ buttons.delete.label }}">
+                    <i class="icon orange trash"></i>              
+                </button>    
+            </div>        
+            <div class="p-1 pt-2 border-0 border-t border-solid border-gray-400" id="actions_content">
+                {{ component('actions::admin.workflows.item.status',{ item: item }) }}          
+            </div>     
+        </div>
+        <div class="four wide column">
+            <h4>
+                {{ labels.action }}           
+            </h4>      
+            <div class="pl-8">
+                {{ item.action.name }}  
+            </div>                 
+        </div>
+        <div class="five wide column">
+            <h4>
+                {{ labels.condition }}
+                <button class="ui basic icon mini button edit-item-condition right floated" uuid="{{ item.uuid }}">
+                    <i class="icon blue edit"></i>         
+                </button>
+            </h4>
+            <div id="condition_content_{{ item.uuid }}">            
+                {{ component('actions::admin.condition.details',{ item: item }) }}   
+            </div>       
+        </div>
+        <div class="six wide column">
+            <h4>
+                {{ labels.settings }}
+                <button class="ui basic icon mini button edit-item-config right floated" uuid="{{ item.uuid }}">
+                    <i class="icon blue edit"></i>         
+                </button>
+            </h4>    
+            <div id="config_content_{{ item.uuid }}">
+                {{ component('actions::admin.workflows.item.config',{ item: item }) }}           
             </div>
-            <button class="ui basic mini compact  right floated button icon delete-item" uuid="{{ item.uuid }}" title="{{ buttons.delete.label }}">
-                <i class="icon orange trash"></i>              
-            </button>    
-        </div>        
-        <div class="p-1 pt-2 border-0 border-t border-solid border-gray-400" id="actions_content">
-            {{ component('actions::admin.workflows.item.status',{ item: item }) }}          
-        </div>     
-    </div>
-    <div class="four wide column">
-        <h4>
-            {{ labels.action }}           
-        </h4>      
-        <div class="pl-8">
-            {{ item.action.name }}  
-        </div>                 
-    </div>
-    <div class="five wide column">
-        <h4>
-            {{ labels.condition }}
-            <button class="ui basic icon mini button edit-item-condition right floated" uuid="{{ item.uuid }}">
-                <i class="icon blue edit"></i>         
-            </button>
-        </h4>
-        <div id="condition_content_{{ item.uuid }}">            
-            {{ component('actions::admin.condition.details',{ item: item }) }}   
         </div>       
     </div>
-    <div class="six wide column">
-        <h4>
-            {{ labels.settings }}
-            <button class="ui basic icon mini button edit-item-config right floated" uuid="{{ item.uuid }}">
-                <i class="icon blue edit"></i>         
-            </button>
-        </h4>    
-        <div id="config_content_{{ item.uuid }}">
-            {{ component('actions::admin.workflows.item.config',{ item: item }) }}           
-        </div>
-    </div>       
 </div>
-<div class="ui horizontal divider row-{{ item.uuid }}">
-    <i class="icon circle outline mini blue"></i>
-</div> 
