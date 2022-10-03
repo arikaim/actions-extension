@@ -61,10 +61,17 @@ class Actions extends Model
         return (empty($this->attributes['config']) == true) ? [] : \json_decode($this->attributes['config'],true);
     }
     
-    public function findAction($key)
+    /**
+     * Find action
+     *
+     * @param mixed $key
+     * @return object|null
+     */
+    public function findAction($key): ?object
     {
         $model = $this->findByColumn($key,'name');
-        return (\is_object($model) == true) ? $model : $this->findById($key);
+
+        return ($model == null) ? $this->findById($key) : $model;
     }
 
     /**

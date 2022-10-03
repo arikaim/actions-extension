@@ -60,17 +60,6 @@ class WorkflowsControlPanel extends ControlPanelApiController
     public function init()
     {
         $this->loadMessages('actions::admin.messages');
-    }
-
-    /**
-     * Constructor
-     * 
-     * @param Container $container  
-    */
-    public function __construct($container = null)
-    {
-        parent::__construct($container);
-        
         $this->setExtensionName('actions');
         $this->setModelClass('Workflows');
     }

@@ -1,50 +1,52 @@
 {% if uuid is not empty %}
     {% set action = createModel('Actions','actions').findById(uuid) %}
 {% endif %}
-{% if hide_title != true %}
-    {{ component('semantic~segment-title',{ title: title, icon: 'info', close_button: true }) }}    
-{% endif %}
-<div class="mt-2">
-    <h4>{{ labels.name }}</h4>
-    <div class="ui pl-1 basic label">
-        {{ action.name }}
+<div>
+    {% if hide_title != true %}
+        {{ component('semantic~segment-title',{ title: title, icon: 'info', close_button: true }) }}    
+    {% endif %}
+    <div class="mt-2">
+        <h4>{{ labels.name }}</h4>
+        <div class="ui pl-1 basic label">
+            {{ action.name }}
+        </div>
+        <table class="ui very basic definition table {{ table_class|default('mini') }}">           
+            <tbody>
+                {% if action.secret is not empty %}
+                <tr>
+                    <td class="right aligned">
+                        {{ labels.secret }}
+                    </td>
+                    <td>
+                    {{ action.secret }}
+                    </td>
+                </tr>    
+                {% endif %}
+            
+                <tr>
+                    <td class="right aligned">
+                        <div class="ui basic label">GET</div>
+                    </td>
+                    <td>
+                    {{ url('/api/actions/run?name=' ~ action.name,true) }}
+                    </td>
+                </tr>   
+                <tr>
+                    <td class="right aligned">
+                        <div class="ui basic label">POST</div>
+                        <div class="ui basic label">PUT</div>
+                    </td>
+                    <td>
+                    {{ url('/api/actions/run',true) }}
+                    </td>
+                </tr>   
+            </tbody>  
+        </table>      
+        {{  component('system:admin.help.api.details',{ 
+                class: action.handler_class, 
+                method: 'execute', 
+                hide_route_details: true 
+            }) 
+        }}
     </div>
-    <table class="ui very basic definition table {{ table_class|default('mini') }}">           
-        <tbody>
-            {% if action.secret is not empty %}
-            <tr>
-                <td class="right aligned">
-                    {{ labels.secret }}
-                </td>
-                <td>
-                   {{ action.secret }}
-                </td>
-            </tr>    
-            {% endif %}
-          
-            <tr>
-                <td class="right aligned">
-                    <div class="ui basic label">GET</div>
-                </td>
-                <td>
-                   {{ url('/api/actions/run?name=' ~ action.name,true) }}
-                </td>
-            </tr>   
-            <tr>
-                <td class="right aligned">
-                    <div class="ui basic label">POST</div>
-                    <div class="ui basic label">PUT</div>
-                </td>
-                <td>
-                   {{ url('/api/actions/run',true) }}
-                </td>
-            </tr>   
-        </tbody>  
-    </table>      
-    {{  component('system:admin.help.api.details',{ 
-            class: action.handler_class, 
-            method: 'execute', 
-            hide_route_details: true 
-        }) 
-    }}
 </div>
