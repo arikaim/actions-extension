@@ -40,19 +40,20 @@ class Actions extends Extension
         $this->addApiRoute('DELETE','/api/admin/actions/workflow/editor/delete/{uuid}','WorkflowEditorControlPanel','deleteItem','session');     
         $this->addApiRoute('PUT','/api/admin/actions/workflow/editor/status','WorkflowEditorControlPanel','setStatus','session'); 
         $this->addApiRoute('PUT','/api/admin/actions/workflow/editor/job','WorkflowEditorControlPanel','pushActionJob','session'); 
-        
         // Api 
         $this->addApiRoute('PUT','/api/actions/run','ActionsApi','run',['public','token']); 
         $this->addApiRoute('POST','/api/actions/run','ActionsApi','run',['public','token']); 
         $this->addApiRoute('GET','/api/actions/run','ActionsApi','run',['public','token']); 
-        
         // Create db tables
-        $this->createDbTable('ActionsSchema');     
-        $this->createDbTable('WorkflowsSchema');               
-        $this->createDbTable('WorkflowItemsSchema');  
-        
+        $this->createDbTable('Actions');     
+        $this->createDbTable('Workflows');               
+        $this->createDbTable('WorkflowItems');  
+        $this->createDbTable('Rules');     
+        $this->createDbTable('RuleTriggers');     
         // Services
-        $this->registerService('Actions');                
+        $this->registerService('Actions');  
+        // Console
+        $this->registerConsoleCommand('RunRule');                
     }
     
     /**

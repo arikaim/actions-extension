@@ -1,0 +1,93 @@
+{% if uuid is not empty %}
+    {% set action = createModel('Actions','actions').findById(uuid) %}
+{% endif %}
+{% set config = createProperties(action.config) %}
+<div>
+    {% if hide_title != true %}
+        {{ component('semantic~segment-title',{ title: title, icon: 'info', close_button: true }) }}    
+    {% endif %}
+
+    <table class="ui very basic definition table {{ table_class|default('mini') }}">           
+        <tbody>
+            <tr>
+                <td class="right aligned">{{ labels.id }}</td>
+                <td>{{ action.uuid }}</td>
+            </tr>
+            <tr>
+                <td class="right aligned">{{ labels.name }}</td>
+                <td>
+                    {{ action.name }}
+                </td>
+            </tr>               
+            <tr>
+                <td class="right aligned">{{ labels.handler }}</td>
+                <td>
+                    {{ action.handler_class }}
+                </td>
+            </tr>
+            <tr>
+                <td class="right aligned">{{ labels.extension }}</td>
+                <td>
+                    {{ action.package_name }}
+                </td>
+            </tr>  
+            <tr>
+                <td class="right aligned">{{ labels.http }}</td>
+                <td>
+                    {% if action.allow_http_execution == true %}
+                        <div class="ui mini basic label green">
+                            {{ labels.on }}
+                        </div>
+                    {% else %}
+                        <div class="ui mini basic label green">
+                            {{ labels.off }}
+                        </div>
+                    {% endif %}
+                </td>
+            </tr>    
+            {% if action.secret is not empty %}
+            <tr>
+                <td class="right aligned">
+                    {{ labels.secret }}
+                </td>
+                <td>
+                {{ action.secret }}
+                </td>
+            </tr>    
+            {% endif %}
+            {% if action.allow_http_execution == true %}
+            <tr>
+                <td class="right aligned">
+                    <div class="ui basic label">GET</div>
+                </td>
+                <td>
+                {{ url('/api/actions/run?name=' ~ action.name,true) }}
+                </td>
+            </tr>   
+            <tr>
+                <td class="right aligned">
+                    <div class="ui basic label">POST</div>
+                    <div class="ui basic label">PUT</div>
+                </td>
+                <td>
+                {{ url('/api/actions/run',true) }}
+                </td>
+            </tr>   
+            {% endif %}
+        </tbody>  
+    </table>     
+
+    {% if hide_config != true %}
+    <div class="mt-6" id="action_config_content">
+        {% if config|length > 0 %}        
+            <h4>{{ labels.config }}</h4>
+            {{  component('semantic~properties.view',{ 
+                    title: labels.config, 
+                    table_class: 'mini', 
+                    properties: config 
+                }) 
+            }}                
+        {% endif %}
+    </div>
+    {% endif %}
+</div>

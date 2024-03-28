@@ -1,0 +1,15 @@
+{% set items = [ 
+    { title: labels.view, component: 'actions::admin.rules.view', icon: 'list', active: true },
+    { title: labels.create, component: 'actions::admin.rules.add', icon: 'plus' }, 
+] %}
+
+{{  component('semantic~tabs.vertical',{ 
+        items: items, 
+        menu: { id: 'actoins_menu' }, 
+        item_class: 'rules-tab-item',
+        content: {
+            id: 'rules_content',
+            component: 'actions::admin.rules.view'
+        } 
+    })
+}}

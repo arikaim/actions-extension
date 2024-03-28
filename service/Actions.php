@@ -21,9 +21,9 @@ use Arikaim\Core\Arikaim;
 class Actions extends Service implements ServiceInterface
 {
     /**
-     * Constructor
+     * Init
      */
-    public function __construct()
+    public function boot()
     {
         $this->setServiceName('actions');
     }
@@ -39,9 +39,7 @@ class Actions extends Service implements ServiceInterface
      */
     public function createWorkflow(string $slug, string $title = null, ?int $userId = null, ?string $note = null): bool
     {
-        $model = Model::Workflows('actions');
-        
-        return $model->saveWorkflow($slug,[
+        return Model::Workflows('actions')->saveWorkflow($slug,[
             'title'   => $title,
             'note'    => $note,            
             'user_id' => $userId

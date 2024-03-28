@@ -9,32 +9,28 @@
 */
 namespace Arikaim\Extensions\Actions\Jobs;
 
-use Arikaim\Core\Queue\Jobs\ScheduledJob;
+use Arikaim\Core\Queue\Jobs\Job;
 use Arikaim\Core\Collection\Traits\ConfigProperties;
 use Arikaim\Core\Collection\Properties;
 
 use Arikaim\Core\Interfaces\ConfigPropertiesInterface;
-use Arikaim\Core\Interfaces\Job\JobInterface;
-use Arikaim\Core\Interfaces\Job\ScheduledJobInterface;
 
 /**
- * ActionScheduledJob job decorator
+ * ActionRecurringJob job decorator
  */
-class ActionScheduledJob extends ScheduledJob implements JobInterface, ScheduledJobInterface, ConfigPropertiesInterface
+class ActionRunJob extends Job
 {
     use 
         ConfigProperties;
 
-    /**
-     * Constructor
-     *  
-     * @param string|null $extension
-     * @param string|null $name
-     * @param array $params
+        /**
+     * Init job
+     *
+     * @return void
      */
-    public function __construct(?string $extension,?string $name = null, array $params = [])
+    public function init(): void
     {
-        parent::__construct($extension,$name,$params);       
+        $this->setName('action.run');
     }
 
     /**
