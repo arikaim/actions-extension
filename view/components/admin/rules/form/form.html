@@ -1,0 +1,35 @@
+{% if uuid is not empty %}
+    {% set currency = createModel('Currency','currency').findById(uuid) %}
+{% endif %}
+<form class="ui equal width form" id="rule_form">  
+    <input type="hidden" name="uuid" id="uuid" value="{{ uuid }}">     
+    <div class="field required">
+        <label>{{ fields.title.label }}</label>
+        <input rule="minLength[2]" type="text" name="title" id="title" {{ fields.title.placeholder|attr('placeholder') }} value="{{ currency.title }}">  
+    </div>
+    <div class="fields">
+        <div class="field">
+            <label>{{ fields.code.label }}</label>
+            <input rule="minLength[2]" type="text" name="code" id="code" {{ fields.code.placeholder|attr('placeholder') }} value="{{ currency.code }}"> 
+        </div>    
+        <div class="field">
+            <label>{{ fields.icon.label }}</label>
+            <input type="text" name="icon" id="icon" {{ fields.icon.placeholder|attr('placeholder') }} value="{{ currency.icon }}"> 
+        </div>  
+        <div class="field">
+            <label>{{ fields.sign.label }}</label>
+            <input type="text" name="sign" id="sign" {{ fields.sign.placeholder|attr('placeholder') }} value="{{ currency.sign }}"> 
+        </div>              
+    </div>    
+    <div class="ui segment two fields">
+        <div class="field">
+            <label>{{ fields.crypto.label }}</label>
+            <input type="checkbox" name="crypto" id="crypto" value="1" {{ (currency.crypto == 1) ? 'checked': '' }} >        
+        </div>
+        <div class="field">
+            <label>{{ fields.private.label }}</label>
+            <input type="checkbox" name="private" id="private" value="1" {{ (currency.private == 1) ? 'checked': '' }} >        
+        </div>
+    </div>
+    {{ component('semantic~form.footer') }}   
+</form>
