@@ -1,16 +1,8 @@
-
-
 <div class="ui segment">   
-   
-    <div class="ui two column grid">
-        <div class="column">
-            <div class="ui middle aligned divided relaxed list" id="actions_rows" component="actions::admin.actions.view.items">
-                {{ component('actions::admin.actions.view.items') }}
-            </div>
-            <div id="paginator">
-                {{ component('semantic~paginator',{ namespace: 'actions' }) }}
-            </div>
-        </div>
-       
+    <div class="ui middle aligned divided relaxed list" id="rules_rows" component="actions::admin.actions.view.items">
+        {{ component('actions::admin.rules.view.items') }}
+    </div>
+    <div id="paginator">
+        {{ component('semantic~paginator',{ namespace: 'actions' }) }}
     </div>
 </div>
