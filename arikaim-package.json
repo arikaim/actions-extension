@@ -5,7 +5,7 @@
     "type": "user",
     "description": "Workflow automation.",
     "short-description": "Actions",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "private-repository": true,
     "repository-type": "arikaim",
     "repository": "arikaim-repository/actions-extension",

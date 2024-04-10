@@ -6,7 +6,7 @@
  */
 'use strict';
 
-function ActionsView() {
+function RulesView() {
     var self = this;
 
     this.init = function() {     
