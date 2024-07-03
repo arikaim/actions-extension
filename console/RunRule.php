@@ -41,10 +41,14 @@ class RunRule extends ConsoleCommand
         global $arikaim;
 
         $this->showTitle();
-      
-        $variables = Rule::getVariables('test');
+    
         
-        print_r($variables);
+        $arikaim->get('event')->addDispatchEventJob('myevent',[
+            'param1' => 100
+        ]);
+  //      $variables = Rule::getVariables('test');
+        
+//        print_r($variables);
 
         $this->showCompleted();
     }
