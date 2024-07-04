@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use Arikaim\Core\Db\Traits\Uuid;
 use Arikaim\Core\Db\Traits\Find;
+use Arikaim\Core\Db\Traits\OptionsAttribute;
 
 /**
  * Actions database model
@@ -20,6 +21,7 @@ use Arikaim\Core\Db\Traits\Find;
 class Actions extends Model
 {
     use Uuid,
+        OptionsAttribute,
         Find;
  
     /**
@@ -52,16 +54,6 @@ class Actions extends Model
     public $timestamps = false;
 
     /**
-     * Mutator (get) for config attribute.
-     *
-     * @return array
-     */
-    public function getConfigAttribute()
-    {
-        return (empty($this->attributes['config']) == true) ? [] : \json_decode($this->attributes['config'],true);
-    }
-    
-    /**
      * Find action
      *
      * @param mixed $key
@@ -70,30 +62,11 @@ class Actions extends Model
     public function findAction($key): ?object
     {
         $model = $this->findByColumn($key,'name');
+        if ($model == null) {
+            $model = $this->findByColumn($key,'handler_class');
+        }
 
         return ($model == null) ? $this->findById($key) : $model;
-    }
-
-    /**
-     * Save action config
-     *
-     * @param string|int $id
-     * @param array $config
-     * @return boolean
-     */
-    public function saveActionConfig($id, array $config): bool
-    {
-        $model = $this->findById($id);
-        if (empty($model) == true) {
-            $model = $this->findByColumn($id,'name');
-        }
-        if (empty($model) == true) {
-            return false;
-        }
-
-        return (bool)$model->update([
-            'config' => \json_encode($config)
-        ]);
     }
 
     /**
@@ -110,10 +83,17 @@ class Actions extends Model
             return false;
         }
 
-        $model = $this->findByColumn($handlerClass,'handler_class');
-        
-        $result = (\is_object($model) == true) ? $model->update($data) : $this->create($data);
+        $model = $this->findAction($name);
+        if ($model == null) {
+            $model = $this->findAction($handlerClass);
+        }
 
-        return (\is_object($result) == true) ? true : (bool)$result;
+        if ($model !== null) {
+            return ($model->update($data) !== false);
+        }
+
+        $model = $this->create($data);
+
+        return ($model !== null);
     }
 }

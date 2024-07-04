@@ -1,9 +1,0 @@
-{
-    "labels": {
-        "empty": "Queue is empty",
-        "settings": "Action Settings",
-        "details": "Action Details",
-        "recurring": "Recurring Job",
-        "scheduled": "Scheduled Job"
-    }
-}

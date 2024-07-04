@@ -6,7 +6,9 @@ arikaim.component.onLoaded(function() {
             arikaim.page.loadContent({
                 id: 'import-details',
                 component: "actions::admin.actions.import.details",
-                params: { extension_name : name },
+                params: { 
+                    extension_name : name 
+                },
                 useHeader: true
             });     
         }

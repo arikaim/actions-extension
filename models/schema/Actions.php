@@ -40,10 +40,11 @@ class Actions extends Schema
         $table->string('package_type')->nullable(true);
         $table->integer('allow_http_execution')->nullable(true);
         $table->string('secret')->nullable(true);
-        $table->text('config')->nullable(true);
+        $table->options();
         // indexes         
         $table->unique('name');
         $table->unique('handler_class');
+        
         $table->index('package_name');       
     }
 

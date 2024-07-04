@@ -10,8 +10,7 @@
 namespace Arikaim\Extensions\Actions\Controllers;
 
 use Arikaim\Core\Controllers\ControlPanelApiController;
-use Arikaim\Core\Db\Model;
-use Arikaim\Core\Interfaces\ConfigPropertiesInterface;
+use Arikaim\Core\Actions\Actions;
 
 /**
  * Actions control panel controler
@@ -34,73 +33,32 @@ class ActionsControlPanel extends ControlPanelApiController
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
      * @param Validator $data
-     * @return Psr\Http\Message\ResponseInterface
+     * @return mixed
     */
     public function importController($request, $response, $data) 
     {         
-        $this->onDataValid(function($data) {
-            $packageName = $data->getString('package');
-            $type = $data->getString('type','extension');
-            $actions = Model::Actions('actions');
+        $data
+            ->validate(true);    
 
-            $packageManager = $this->get('packages')->create($type);
+        $packageName = $data->getString('package');
+        $type = $data->getString('type','extension');
 
-            $properties = $packageManager->getPackageProperties($packageName,true);
-            $imported = 0;
+        $action = Actions::create('ImportActions','actions',[
+            'package_name' => $packageName,
+            'package_type' => $type
+        ])->getAction();
+         
+        $action->run();
+        
+        if ($action->hasError() == true) {
+            $this->error($action->getError());
+            return false;
+        }
 
-            foreach ($properties['jobs'] as $item) {
-                $item['handler_class'] = $item['class'];
-                $item['package_name'] = $packageName;
-                $item['package_type'] = $type;
-                // create job action 
-                $job = $this->get('queue')->create($item['handler_class']);
-            
-                $config = ($job instanceof ConfigPropertiesInterface) ? $job->createConfigProperties() : [];
-                $item['config'] = \json_encode($config);
-              
-                $result = $actions->saveAction($item);
-                $imported += ($result == true) ? 1 : 0;
-            }
-
-            $this->setResponse(true,function() use($packageName,$imported) {                                
-                $this
-                    ->message('import')        
-                    ->field('imported',$imported)       
-                    ->field('package',$packageName);                                                                                        
-            },'errors.import');
-        });
-        $data->validate();        
-    }
-
-    /**
-     * Action save settings
-     *
-     * @param \Psr\Http\Message\ServerRequestInterface $request
-     * @param \Psr\Http\Message\ResponseInterface $response
-     * @param Validator $data
-     * @return Psr\Http\Message\ResponseInterface
-    */
-    public function saveSettingsController($request, $response, $data) 
-    {         
-        $this->onDataValid(function($data) {
-            $uuid = $data->get('uuid');
-            $action = Model::Actions('actions')->findAction($uuid);
-            if (\is_object($action) == false) {
-                $this->error('Not valid action id');
-                return false;
-            }
-
-            $result = $action->update([
-                'secret'               => $data->get('secret'),
-                'allow_http_execution' => $data->get('allow_http_execution')
-            ]);
-
-            $this->setResponse(($result !== false),function() use($action) {                                
-                $this
-                    ->message('action.settings')        
-                    ->field('uuid',$action->uuid);                                                                                                         
-            },'errors.settings');
-        });
-        $data->validate();        
+        $this
+            ->message('import')        
+            ->field('imported',$action->get('imported'))       
+            ->field('type',$type)       
+            ->field('package',$packageName);                                                                                        
     }
 }

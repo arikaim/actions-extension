@@ -1,8 +1,6 @@
 {   
-    "title": {
-        "content": "Import Actions",
-        "icon": "plus"
-    },
+    "title": "Import Actions",
+    "icon": "plus",
     "labels": {
         "extension": "Extension"    
     }

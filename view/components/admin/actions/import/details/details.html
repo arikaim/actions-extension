@@ -1,31 +1,34 @@
-{% set extension = package('extension').getPackageProperties(extension_name,true) %}
+{% set actions = service('packages').create('extension').createPackage(extension_name).getPackageActions() %}
 <div class="mt-4">
     <div class="ui horizontal mini divider header">
-        {{ labels.jobs }}
+        {{ labels.actions }}
     </div>
     <div class="ui list">
-        {% if extension.jobs|length == 0 %}
+        {% if actions|length == 0 %}
             <div class="item">
                 {{ message }}
             </div>
         {% endif %}        
-        {% for item in extension.jobs %}
+        {% for item in actions %}
         <div class="item">
             <div class="content">                            
                 <i class="icon code blue"></i>          
-                {{ item.base_class }}                 
+                {{ item }}                 
             </div>                   
         </div>
         {% endfor %}
     </div>
     <div class="p-2" id="import_details">
     </div>
-    {% if extension.jobs|length > 0 %}
-    <div class="mt-4">
-        <button class="ui icon labeled green button mini import-actions" package-name="{{ extension_name }}">
-            <i class="icon plus"></i>
-            {{ labels.import }}
-        </button>
-    </div>
+    {% if actions|length > 0 %}
+        <div class="mt-4">
+            <button 
+                class="ui icon labeled green button mini import-actions" 
+                package-type="extension"
+                package-name="{{ extension_name }}">
+                <i class="icon plus"></i>
+                {{ labels.import }}
+            </button>
+        </div>
     {% endif %}
 </div>

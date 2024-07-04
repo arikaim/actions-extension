@@ -1,10 +1,8 @@
-{% set items = [ 
-    { title: labels.view, component: 'actions::admin.actions.view', icon: 'list', active: true },
-    { title: labels.import, component: 'actions::admin.actions.import', icon: 'plus' }, 
-] %}
-
 {{  component('semantic~tabs.vertical',{ 
-        items: items, 
+        items: [ 
+            { title: labels.view, component: 'actions::admin.actions.view', icon: 'list', active: true },
+            { title: labels.import, component: 'actions::admin.actions.import', icon: 'plus' }, 
+        ], 
         menu: { id: 'actoins_menu' }, 
         item_class: 'actions-tab-item',
         content: {

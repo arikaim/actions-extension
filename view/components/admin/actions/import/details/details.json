@@ -1,7 +1,7 @@
 {
-    "message": "Thi extension no contain jobs",
+    "message": "This package no contain actions",
     "labels": {
         "import": "Import",
-        "jobs": "Jobs"
+        "actions": "Actions"
     }
 }
