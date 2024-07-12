@@ -15,6 +15,7 @@ use Arikaim\Extensions\Actions\Models\Actions;
 use Arikaim\Core\Db\Traits\Uuid;
 use Arikaim\Core\Db\Traits\Find;
 use Arikaim\Core\Db\Traits\DateCreated;
+use Arikaim\Core\Db\Traits\OptionsAttribute;
 
 /**
  * Workflow items database model
@@ -23,6 +24,7 @@ class WorkflowItems extends Model
 {
     use Uuid,
         DateCreated,
+        OptionsAttribute,
         Find;
  
     /**
@@ -31,14 +33,15 @@ class WorkflowItems extends Model
      * @var array
     */
     protected $fillable = [
-        'action_id',
-        'workflow_id',      
-        'condition_type',
-        'condition_value',
-        'job_id',
+        'workflow_id', 
+        'rule_condition',    
+        'trigger_type',
+        'trigger_value',
+        'action',
+        'action_options',
         'date_created',
         'status',     
-        'config'
+        'options'
     ];
     
     /**
@@ -55,42 +58,4 @@ class WorkflowItems extends Model
      */
     public $timestamps = false;
 
-    /**
-     * Mutator (get) for config attribute.
-     *
-     * @return array
-     */
-    public function getConfigAttribute()
-    {
-        return (empty($this->attributes['config']) == true) ? [] : \json_decode($this->attributes['config'],true);
-    }
-    
-    /**
-     * Save action config
-     *   
-     * @param array $config
-     * @param string|int|null $id
-     * @return boolean
-     */
-    public function saveConfig(array $config, $id = null): bool
-    {
-        $model = (empty($id) == true) ? $this : $this->findById($id);      
-        if (empty($model) == true) {
-            return false;
-        }
-
-        return (bool)$model->update([
-            'config' => \json_encode($config)
-        ]);
-    }   
-    
-    /**
-     * Action relation
-     *
-     * @return Relation|null
-     */
-    public function action()
-    {
-        return $this->belongsTo(Actions::class,'action_id');
-    }   
 }

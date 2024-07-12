@@ -63,14 +63,11 @@ class Workflows extends Model
      * @param string $slug
      * @return Model|null
      */
-    public function findWorkflow(string $slug)
+    public function findWorkflow(string $slug): ?object
     {
         $model = $this->findBySlug($slug);
-        if (\is_object($model) == false) { 
-            $model = $this->findById($slug);
-        }
 
-        return $model;
+        return ($model == null) ? $this->findById($slug) : $model;
     } 
 
     /**
@@ -83,13 +80,13 @@ class Workflows extends Model
     public function saveWorkflow(string $slug, array $data): bool
     {
         $model = $this->findWorkflow($slug);
-        if (\is_object($model) == true) {
+        if ($model != null) {
             return (bool)$model->update($data); 
         }
         $data['slug'] = $slug;
         $data['title'] = (empty($data['title']) == true) ?  $data['slug'] : $data['title'];
         $created = $this->create($data);
 
-        return \is_object($created);
+        return ($created != null);
     }
 }

@@ -36,11 +36,11 @@ class Rules extends Schema
         $table->prototype('uuid');
         $table->userId();
         $table->status();
-       
+      
         $table->string('title')->nullable(false);
         $table->string('category')->nullable(true);
         $table->text('description')->nullable(true);
-        $table->text('code')->nullable(false);
+        $table->text('condition')->nullable(true);
         $table->options();
 
         // indexes         

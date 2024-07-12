@@ -31,14 +31,14 @@ class Actions extends Extension
       //  $this->addApiRoute('PUT','/api/actions/run','ActionsApi','run',['public','token']); 
         // Create db tables
         $this->createDbTable('Actions');     
-       // $this->createDbTable('Workflows');               
-       // $this->createDbTable('WorkflowItems');  
-       // $this->createDbTable('Rules');     
+        $this->createDbTable('Rules');     
+        $this->createDbTable('Workflows');               
+        $this->createDbTable('WorkflowItems');  
+    
        // $this->createDbTable('RuleTriggers');     
         // Services
         $this->registerService('Actions');  
-        // Console
-        $this->registerConsoleCommand('RunRule');             
+        // Console    
         $this->registerConsoleCommand('ImportActions');                 
     }
     

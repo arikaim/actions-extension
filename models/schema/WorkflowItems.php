@@ -36,15 +36,18 @@ class WorkflowItems extends Schema
         $table->prototype('uuid');
         $table->relation('workflow_id','workflows');
         $table->status();
-        $table->relation('action_id','actions');  
-        $table->integer('job_id')->nullable(true);    
-        $table->string('condition_type')->nullable(true);      
-        $table->string('condition_value')->nullable(true);   
-        $table->text('config')->nullable(true);
+        $table->text('rule_condition')->nullable(true);
+        $table->string('trigger_type')->nullable(true);
+        $table->string('trigger_value')->nullable(true);
+        $table->string('action')->nullable(true);      
+        $table->text('action_options')->nullable(true);   
+
+        $table->options();
         $table->dateCreated();
 
         // indexes              
-        $table->index('condition_type');
+        $table->index('action');
+        $table->index('trigger_type');
     }
 
     /**

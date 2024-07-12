@@ -66,7 +66,7 @@ class Workflows extends Schema
      */
     public function seeds($seed)
     {
-        $items = Extension::loadJsonConfigFile('workflows.json','actions');
+        $items = Extension::loadJsonConfigFile('workflows.json','workflow');
         $seed->createFromArray(['title'],$items,function($item) {
             $item['uuid'] = Uuid::create();          
             return $item;
