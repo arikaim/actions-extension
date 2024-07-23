@@ -48,13 +48,10 @@ class ImportActions extends ConsoleCommand
         $action = Actions::create('ImportActions','actions',[
             'package_name' => 'telegram',
             'package_type' => 'extension'
-        ])->getAction();
+        ])->run();
          
-        $action->run();
-
 
         $this->writeLn('Imported:' . $action->get('imported'));
-
         $this->showCompleted();
     }
 }

@@ -1,0 +1,10 @@
+{% set action = createModel('Actions','actions').findAction(action_name) %}  
+{% set descriptor = createAction(action.handler_class,action.package_name).descriptor() %}
+
+<div class="mt-4">
+    {{  component('semantic~properties.items',{
+            field_group: 'action_optios',
+            items: descriptor.get('options') 
+        }) 
+    }}
+</div>

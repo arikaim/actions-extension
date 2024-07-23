@@ -50,27 +50,19 @@ class ImportActions extends Action
         $actions = $package->getPackageActions();
         $imported = 0;
 
-        echo $packageType . PHP_EOL;
-        echo $packageName .   PHP_EOL;
-
         foreach ($actions as $actionClass) {
             
-            echo $actionClass;
-
-            if ($packageType == 'extension') {
-                echo "from ext";
+            if ($packageType == 'extension') {              
                 $action = Actions::createFromExtension($actionClass,$packageName)->getAction();
-                var_dump($action);
-                
-                print_r($action->toArray());
             } else {
                 $action = Actions::createFromModule($actionClass,$packageName)->getAction();
             }
 
-          
-
             if (($action instanceof ActionNotFound) == false) {
-                $result = $model->saveAction($action->toArray());
+                $info = $action->toArray();
+                $info['package_type'] = $packageType;
+                $info['package_name'] = $packageName;
+                $result = $model->saveAction($info);
                 $imported += ($result == true) ? 1 : 0;
             }
         }
