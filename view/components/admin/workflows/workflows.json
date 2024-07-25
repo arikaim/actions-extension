@@ -1,7 +1,5 @@
 {
     "labels": {
-        "edit": "Edit",
-        "create": "Create",
-        "import": "Import"
+        "workflow": "Workflow"       
     }
 }

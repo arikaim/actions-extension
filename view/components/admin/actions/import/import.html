@@ -1,19 +1,36 @@
-{% component 'semantic~panel' %}
-<div class="ui mt-8">    
-    <div>
-        <h4>
-            {{ labels.extension }}
-        </h4>        
-        <div class="flex flex-rows items-center">
-            <div class="w-1/2 flex-grow">
-                {{ component("system:admin.extensions.dropdown",{ selected: extension, class: 'fluid' }) }} 
-            </div>
-            <div class="w-1/2 flex-grow">
+<div class="ui two column grid">
+    <div class="column">
+        {% component 'semantic~panel' %}
+            <div class="flex flex-row items-start">    
+                <div class="w-1/2">
+                    <h4>
+                        {{ labels.extension }}
+                    </h4>        
+                    <div class="flex flex-rows items-center">
+                        <div class="w-1/2 flex-grow">
+                            {{ component("system:admin.extensions.dropdown",{ selected: extension, class: 'fluid' }) }} 
+                        </div>
+                        <div class="w-1/2 flex-grow">
 
+                        </div>
+                    </div>      
+                </div>
+                <div class="w-1/2">
+                    <h4>
+                        {{ labels.module }}
+                    </h4>        
+                    <div class="flex flex-rows items-center">
+                        <div class="w-1/2 flex-grow">
+                            {{ component("system:admin.modules.dropdown",{ selected: module, class: 'fluid' }) }} 
+                        </div>
+                        <div class="w-1/2 flex-grow">
+
+                        </div>
+                    </div>      
+                </div>               
             </div>
-        </div>      
-    </div>
-    <div class="mt-2" id="import-details">
+            <div class="mt-2" id="import-details">
+            </div>
+        {% endcomponent %}
     </div>
 </div>
-{% endcomponent %}

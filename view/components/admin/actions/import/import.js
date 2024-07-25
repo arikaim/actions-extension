@@ -13,4 +13,17 @@ arikaim.component.onLoaded(function() {
             });     
         }
     });   
+    
+    $('#modules_dropdown').dropdown({
+        onChange: function(name) {              
+            arikaim.page.loadContent({
+                id: 'import-details',
+                component: "actions::admin.actions.import.details",
+                params: { 
+                    module_name : name 
+                },
+                useHeader: true
+            });     
+        }
+    });   
 });

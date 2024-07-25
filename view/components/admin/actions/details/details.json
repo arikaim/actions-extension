@@ -1,5 +1,6 @@
 {
     "title": "Action Details",
+    "icon": "info",
     "labels": {
         "id": "Id",
         "name": "Name",
@@ -8,7 +9,9 @@
         "secret": "Secret",
         "handler": "Handler", 
         "config": "Config",
+        "properties": "Properties",
         "http": "Run with http request",
+        "module": "Module",
         "extension": "Extension"           
     }
 }

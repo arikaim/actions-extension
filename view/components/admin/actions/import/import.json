@@ -2,6 +2,7 @@
     "title": "Import Actions",
     "icon": "plus",
     "labels": {
-        "extension": "Extension"    
+        "extension": "Extension",
+        "module": "Module"
     }
 }

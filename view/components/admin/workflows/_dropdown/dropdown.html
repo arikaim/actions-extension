@@ -1,7 +1,7 @@
 {% set size = size|default(15) %}
 {% set workflows = createModel('Workflows','actions') %}
 {% if selected is not empty %}
-    {% set item_selected = workflows.findWorkflow(selected) %}
+    {% set item_selected = workflows.findById(selected) %}
 {% endif %}
 {% set items = workflows.get() %}
 {% set data_field = data_field|default('uuid') %}

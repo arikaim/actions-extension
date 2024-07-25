@@ -13,26 +13,9 @@ function WorkflowEditorView() {
         this.loadMessages('actions::admin.workflows.editor');
 
         paginator.init('workflow_rows',"actions::admin.workflows.editor.items",'workflow'); 
-
-        arikaim.ui.button('.create-action-item',function(element) {
-            var workflow = $(element).attr('workflow');
-            $('#item_edit_content').removeClass('hidden');
-            
-            return arikaim.page.loadContent({
-                id: 'item_edit_content',           
-                component: 'actions::admin.workflows.item.create',
-                params: { workflow: workflow }            
-            });  
-        });
     };
 
-    this.loadConditionDetails = function(uuid) {
-        return arikaim.page.loadContent({
-            id: 'condition_content_' + uuid,           
-            component: 'actions::admin.condition.details',
-            params: { uuid: uuid }            
-        });  
-    };
+   
 
     this.loadItems = function(workflowId) {
         return arikaim.page.loadContent({
@@ -41,52 +24,6 @@ function WorkflowEditorView() {
             params: { 
                 workflow_id: workflowId 
             }            
-        });
-    };
-
-    this.initRows = function() {
-        
-        arikaim.ui.button('.delete-item',function(element) {
-            var uuid = $(element).attr('uuid'); 
-            
-            return modal.confirmDelete({ 
-                title: self.getMessage('delete.title'),
-                description: self.getMessage('delete.content')
-            },function() {
-                workflowEditor.delete(uuid,function(result) {
-                    arikaim.ui.table.removeRow('.row-' + uuid);     
-                });
-            });                 
-        });
-
-        arikaim.ui.button('.edit-item-condition',function(element) {
-            var uuid = $(element).attr('uuid');
-            $('#item_edit_content').removeClass('hidden');
-            
-            return arikaim.page.loadContent({
-                id: 'item_edit_content',           
-                component: 'actions::admin.workflows.item.edit',
-                params: { uuid: uuid }            
-            });  
-        });
-
-        arikaim.ui.button('.edit-item-config',function(element) {
-            var uuid = $(element).attr('uuid');
-            $('#item_edit_content').removeClass('hidden');
-
-            return arikaim.page.loadContent({
-                id: 'item_edit_content',           
-                component: 'actions::admin.workflows.item.config.edit',
-                params: { uuid: uuid }            
-            });  
-        });
-
-        arikaim.ui.button('.push-queue-button',function(element) {
-            var uuid = $(element).attr('uuid');
- 
-            workflowEditor.pushActionJob(uuid,function(result) {
-                console.log(result);
-            });
         });
     };
 }

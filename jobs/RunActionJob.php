@@ -12,13 +12,13 @@ namespace Arikaim\Extensions\Actions\Jobs;
 use Arikaim\Core\Queue\Jobs\Job;
 use Arikaim\Core\Collection\Traits\ConfigProperties;
 use Arikaim\Core\Collection\Properties;
-
 use Arikaim\Core\Interfaces\ConfigPropertiesInterface;
+use Arkaim\Core\Actions\Actions;
 
 /**
- * ActionRecurringJob job decorator
+ * Run action
  */
-class ActionRunJob extends Job
+class RunActionJob extends Job implements ConfigPropertiesInterface
 {
     use 
         ConfigProperties;
@@ -30,7 +30,7 @@ class ActionRunJob extends Job
      */
     public function init(): void
     {
-        $this->setName('action.run');
+        $this->setName('run.action');
     }
 
     /**
@@ -42,14 +42,13 @@ class ActionRunJob extends Job
     {
         $config = $this->getConfigProperties();  
  
-        $jobClass = $config->getValue('job_class');
-        $job = new $jobClass($this->getExtensionName(),$this->getName(),$this->params);
+        $actionName = $config->getValue('action_name');
+        $packageName = $config->getValue('package_name');
 
-        if ($job instanceof ConfigPropertiesInterface) {
-            $job->setConfigProperties($config);
+        $action = Actions::create($actionName,$packageName,$config)->run();
+        if ($action->hasError() == true) {
+
         }
-
-        return $job->execute();
     }
 
     /**

@@ -1,15 +1,16 @@
-{% set items = [ 
-    { title: labels.edit, component: 'actions::admin.workflows.editor', icon: 'edit', active: true },
-    { title: labels.create, component: 'actions::admin.workflows.create', icon: 'plus' }
-] %}
-
-{{  component('semantic~tabs.vertical',{ 
-        items: items, 
-        menu: { id: 'workflows_menu' }, 
-        item_class: 'workflows-tab-item',
-        content: {
-            id: 'workflows_content',
-            component: 'actions::admin.workflows.editor'
-        } 
-    })
-}}
+<div class="ui segment">      
+    <div class="flex flex-row items-center">
+        <div class="font-bold">           
+           {{ labels.workflow }}
+        </div>
+        <div class="px-2">
+            {{ component('actions::admin.workflows.dropdown',{ }) }}
+        </div>             
+    </div>    
+</div>     
+<div class="flex flex-row items-start"> 
+    <div class="w-full flex-grow pt-2" id="workflow_items" 
+        component="actions::admin.workflows.view.items" namespace="workflow">
+        {{ component('actions::admin.workflows.view.items',{ workflow_id: workflow.id }) }}      
+    </div>     
+</div>

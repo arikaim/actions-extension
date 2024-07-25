@@ -11,11 +11,13 @@ namespace Arikaim\Extensions\Actions\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Arikaim\Extensions\Actions\Models\WorkflowItems;
 use Arikaim\Core\Db\Traits\Uuid;
 use Arikaim\Core\Db\Traits\Find;
 use Arikaim\Core\Db\Traits\DateCreated;
 use Arikaim\Core\Db\Traits\UserRelation;
 use Arikaim\Core\Db\Traits\Slug;
+use Arikaim\Core\Db\Traits\Status;
 
 /**
  * Workflows database model
@@ -24,6 +26,7 @@ class Workflows extends Model
 {
     use Uuid,
         DateCreated,
+        Status,
         Slug,
         UserRelation,
         Find;
@@ -57,6 +60,30 @@ class Workflows extends Model
      */
     public $timestamps = false;
 
+    /**
+     * Workflow items relation
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function items()
+    {
+        return $this->hasMany(WorkflowItems::class,'workflow_id');
+    }
+
+    /**
+     * Filter items
+     * @param string $triggerType
+     * @param mixed $triggerParam
+     * @return mixed
+     */
+    public function queryItems(string $triggerType, $triggerParam = null)
+    {
+        $query = $this->items
+            ->where('trigger_type','=',$triggerType);
+
+        return (empty($triggerParam) == true) ? $query : $query->where('trigger_value','=',$triggerParam);
+    }
+            
     /**
      * Find workflow
      *

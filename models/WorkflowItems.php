@@ -11,11 +11,11 @@ namespace Arikaim\Extensions\Actions\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use Arikaim\Extensions\Actions\Models\Actions;
 use Arikaim\Core\Db\Traits\Uuid;
 use Arikaim\Core\Db\Traits\Find;
 use Arikaim\Core\Db\Traits\DateCreated;
 use Arikaim\Core\Db\Traits\OptionsAttribute;
+use Arikaim\Core\Db\Traits\Status;
 
 /**
  * Workflow items database model
@@ -23,6 +23,7 @@ use Arikaim\Core\Db\Traits\OptionsAttribute;
 class WorkflowItems extends Model
 {
     use Uuid,
+        Status,
         DateCreated,
         OptionsAttribute,
         Find;
@@ -58,4 +59,15 @@ class WorkflowItems extends Model
      */
     public $timestamps = false;
 
+    /**
+     * Mutator (get) for action options attribute.
+     *
+     * @return array
+     */
+    public function getActionOptionsAttribute()
+    {
+        $options = $this->attributes['action_options'] ?? null;
+
+        return (empty($options) == true) ? [] : \json_decode($options,true);
+    }
 }

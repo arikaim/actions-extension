@@ -47,6 +47,7 @@ class ImportActions extends Action
         $model = Model::Actions('actions');
         $packageManager = $arikaim->get('packages')->create($packageType);
         $package = $packageManager->createPackage($packageName);
+        
         $actions = $package->getPackageActions();
         $imported = 0;
 
@@ -66,7 +67,7 @@ class ImportActions extends Action
                 $imported += ($result == true) ? 1 : 0;
             }
         }
-        
+    
         $this->result('imported',$imported);
     }
 

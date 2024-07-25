@@ -1,4 +1,9 @@
-{% set actions = service('packages').create('extension').createPackage(extension_name).getPackageActions() %}
+{% if extension_name is not empty %}
+    {% set actions = service('packages').create('extension').createPackage(extension_name).getPackageActions() %}
+{% endif %}
+{% if module_name is not empty %}
+    {% set actions = service('packages').create('module').createPackage(module_name).getPackageActions() %}
+{% endif %}
 <div class="mt-4">
     <div class="ui horizontal mini divider header">
         {{ labels.actions }}
@@ -22,6 +27,7 @@
     </div>
     {% if actions|length > 0 %}
         <div class="mt-4">
+            {% if extension_name is not empty %}
             <button 
                 class="ui icon labeled green button mini import-actions" 
                 package-type="extension"
@@ -29,6 +35,15 @@
                 <i class="icon plus"></i>
                 {{ labels.import }}
             </button>
+            {% else %}
+            <button 
+                class="ui icon labeled green button mini import-actions" 
+                package-type="module"
+                package-name="{{ module_name }}">
+                <i class="icon plus"></i>
+                {{ labels.import }}
+            </button>
+            {% endif %}
         </div>
     {% endif %}
 </div>

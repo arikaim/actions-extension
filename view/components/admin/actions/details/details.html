@@ -1,12 +1,11 @@
 {% if uuid is not empty %}
     {% set action = createModel('Actions','actions').findById(uuid) %}
 {% endif %}
-{% set config = createProperties(action.config) %}
-<div>
-    {% if hide_title != true %}
-        {{ component('semantic~segment-title',{ title: title, icon: 'info', close_button: true }) }}    
-    {% endif %}
+{% set descriptor = createAction(action.handler_class,action.package_name).descriptor() %}
+{% set items = descriptor.get('options') %}
 
+{% component 'semantic~panel' %}
+<div>  
     <table class="ui very basic definition table {{ table_class|default('mini') }}">           
         <tbody>
             <tr>
@@ -26,7 +25,9 @@
                 </td>
             </tr>
             <tr>
-                <td class="right aligned">{{ labels.extension }}</td>
+                <td class="right aligned">
+                    {{ (action.package_type == 'extension') ? labels.extension : labels.module }}
+                </td>
                 <td>
                     {{ action.package_name }}
                 </td>
@@ -76,18 +77,11 @@
             {% endif %}
         </tbody>  
     </table>     
-
-    {% if hide_config != true %}
-    <div class="mt-6" id="action_config_content">
-        {% if config|length > 0 %}        
-            <h4>{{ labels.config }}</h4>
-            {{  component('semantic~properties.view',{ 
-                    title: labels.config, 
-                    table_class: 'mini', 
-                    properties: config 
-                }) 
-            }}                
-        {% endif %}
+    <h4>
+        {{ labels.properties }}
+    </h4>
+    <div>
+        {{ component('semantic~properties.details',{ properties: items }) }}
     </div>
-    {% endif %}
 </div>
+{% endcomponent %}

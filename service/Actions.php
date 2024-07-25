@@ -53,7 +53,7 @@ class Actions extends Service implements ServiceInterface
      * @param string $packageType
      * @return integer
      */
-    public function importActions(string $packageName, string $packageType = 'extension'): int
+    public function __importActions(string $packageName, string $packageType = 'extension'): int
     {
         $actions = Model::Actions('actions');
         $packageManager = Arikaim::get('packages')->create($packageType);
