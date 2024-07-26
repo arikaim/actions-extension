@@ -7,3 +7,13 @@ Actions manager and workflow automation.
 
 #### Requirements   
   * [Arikaim CMS](https://github.com/arikaim/arikaim)
+
+
+
+#### Installation
+
+```sh
+
+composer require arikaim/actions-extension
+
+```

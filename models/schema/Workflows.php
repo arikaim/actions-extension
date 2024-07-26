@@ -42,7 +42,6 @@ class Workflows extends Schema
         $table->slug();   
         $table->text('note')->nullable(true);
         $table->dateCreated();
-
         // indexes              
         $table->index('title');
         $table->index(['title','user_id']);       

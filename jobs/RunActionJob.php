@@ -45,10 +45,12 @@ class RunActionJob extends Job implements ConfigPropertiesInterface
         $actionName = $config->getValue('action_name');
         $packageName = $config->getValue('package_name');
 
-        $action = Actions::create($actionName,$packageName,$config)->run();
+        $action = Actions::create($actionName,$packageName,$config->toArray())->run();
         if ($action->hasError() == true) {
-
+            return false;
         }
+
+        return true;
     }
 
     /**
