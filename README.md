@@ -1,7 +1,8 @@
 ## Arikaim CMS Actions Extension
+![version: 1.0.0](https://img.shields.io/github/release/arikaim/actions-extension.svg)
+![license: GPL3](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
-
-Workflow automation.
+Actions manager and workflow automation.
 
 
 #### Requirements   

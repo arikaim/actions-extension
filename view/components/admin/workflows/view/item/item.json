@@ -1,0 +1,18 @@
+{
+    "labels": {
+        "status": "Status",
+        "action": "Action",
+        "rule": "Rule",
+        "trigger": "Trigger",
+        "name": "Name",
+        "properties": "Properties",
+        "empty": "..."
+    },
+    "buttons": {     
+        "edit": "Edit item",
+        "delete": {
+            "label": "Delete",
+            "hint": "Delete workflow item"
+        }
+    }
+}

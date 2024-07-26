@@ -58,16 +58,4 @@ class WorkflowItems extends Model
      * @var boolean
      */
     public $timestamps = false;
-
-    /**
-     * Mutator (get) for action options attribute.
-     *
-     * @return array
-     */
-    public function getActionOptionsAttribute()
-    {
-        $options = $this->attributes['action_options'] ?? null;
-
-        return (empty($options) == true) ? [] : \json_decode($options,true);
-    }
 }

@@ -4,13 +4,11 @@
            {{ labels.workflow }}
         </div>
         <div class="px-2">
-            {{ component('actions::admin.workflows.dropdown',{ }) }}
+            {{ component('actions::admin.workflows.dropdown',{ selected: workflow|default('main') }) }}
         </div>             
     </div>    
 </div>     
-<div class="flex flex-row items-start"> 
-    <div class="w-full flex-grow pt-2" id="workflow_items" 
-        component="actions::admin.workflows.view.items" namespace="workflow">
-        {{ component('actions::admin.workflows.view.items',{ workflow_id: workflow.id }) }}      
-    </div>     
-</div>
+<div class="w-full pt-2" id="workflow_items" 
+    component="actions::admin.workflows.view.items" namespace="workflow">
+    {{ component('actions::admin.workflows.view.items',{ workflow: workflow|default('main') }) }}      
+</div>     

@@ -1,0 +1,61 @@
+{% if uuid is not empty %}
+    {% set item = createModel('WorkflowItems','actions').findById(uuid) %}
+{% endif %}
+{% set action = createAction(item.action) %}
+<div 
+    class="ui segment" 
+    id="row_{{ item.uuid }}">
+    <div class="ui streched grid">
+        <div class="column">
+            <div class="ui vertical buttons">
+                <div class="ui basic center aligned text-center label">
+                    <span class="font-bold py-2">{{ index }}</span>           
+                </div>
+            </div>          
+        </div>
+        <div class="two wide column">
+            <h4>
+                {{ labels.trigger }}           
+            </h4>   
+            <div class="font-bold">
+                {{ item.trigger_type }}
+            </div>
+            <div class="ui basic label">
+                {{ item.trigger_value }}
+            </div>
+        </div>
+        <div class="six wide column w-full">
+            <h4>
+                {{ labels.rule }}                
+            </h4>
+            <div class="p-4 rounded bg-gray-100 w-full">
+            {% if item.rule_condition is empty %}
+                {{ labels.empty }}
+            {% else %}
+                {{ service('workflows').highlightRuleCode(item.rule_condition) }}
+            {% endif %}     
+            </div>            
+        </div>
+        <div class="seven wide column">
+            <div class="ui grid">
+                <div class="six wide column">
+                    <h4>
+                        {{ labels.action }}           
+                    </h4>      
+                    <div class="ui basic green label">            
+                        {{ action.getName() }}  
+                    </div>  
+                </div>
+                <div class="ten wide column">
+                    <h4>
+                        {{ labels.properties }}           
+                    </h4>               
+                    {{  component('actions::admin.actions.properties.view',{ 
+                            items: item.getOptions('action_options')
+                        }) 
+                    }}
+                </div>
+            </div>           
+        </div>
+    </div>
+</div>

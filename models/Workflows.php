@@ -78,7 +78,7 @@ class Workflows extends Model
      */
     public function queryItems(string $triggerType, $triggerParam = null)
     {
-        $query = $this->items
+        $query = $this->items()
             ->where('trigger_type','=',$triggerType);
 
         return (empty($triggerParam) == true) ? $query : $query->where('trigger_value','=',$triggerParam);

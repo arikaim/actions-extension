@@ -1,0 +1,31 @@
+<div>
+    <table class="ui very basic definition mini table {{ table_class }}">
+        <thead>
+            <tr>
+                <th class="four wide"></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key, value in items %}
+            <tr>
+                <td class="right aligned">{{ key }}</td>
+                <td>
+                    {% if value is iterable %}
+                        {{ value|dump }}
+                    {% else %}
+                        {% if value is not empty and service('content').isValidSelector(value) == true %}
+                            <div class="ui basic blue label">
+                                {{ labels.relation }}
+                            </div>
+                        {% endif %}
+                        <span class="px-1">
+                            {{ value }}
+                        </span>
+                    {% endif %} 
+                </td>
+            </tr>  
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

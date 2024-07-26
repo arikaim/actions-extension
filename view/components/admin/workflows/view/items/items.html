@@ -1,13 +1,17 @@
+{% if workflow is not empty %}
+    {% set workflow_id = createModel('Workflows','actions').findWorkflow(workflow).id %}
+{% endif %}
+
 {% set items = createModel('WorkflowItems','actions').where('workflow_id','=',workflow_id).orderBy('id') %}
 {% set items = paginate(items,'workflow') %}
 {% set items = items.getItems() %}
 
 {% if items|length == 0 %}
-    <div class="item">
+    <div class="ui segment">
         {{ labels.empty }}
     </div>
 {% endif %}
 
 {% for item in items %}
-    {{ component('actions::admin.workflows.item.details',{ item: item, index: loop.index }) }}     
+    {{ component('actions::admin.workflows.view.item',{ item: item, index: loop.index }) }}     
 {% endfor %}

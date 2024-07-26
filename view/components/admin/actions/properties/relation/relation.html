@@ -2,24 +2,41 @@
 {% if event is not empty %}
     {% set properties = service('event').getEventProperties(event) %}
 {% endif %}
-<div class="ui dropdown relation-dropdown {{ class }}" 
-    {{ title|attr('title') }} 
-    id="{{ id|default('relation_dropdown') }}">    
-    <input {{ rule|attr('rule') }} name="{{ name|default(id) }}" type="hidden" value="{{ item_selected[data_field] }}">  
-    <div class="text">
-        {{ selected|default(labels.select) }}
-    </div>  
-    <i class="icon dropdown"></i> 
-    <div class="menu">        
-        <div class="header">
-            {{ title }}
-        </div> 
-        {% for key, item in properties %}
-        <div 
-            class="item" 
-            data-value="{{ item.name }}">  
-            {{ item.title }}
-        </div>   
-        {% endfor %}          
+
+{% if properties is iterable %}
+    <div
+        field-id="{{ field_id }}"
+        class="ui dropdown relation-dropdown {{ class }}" 
+        {{ title|attr('title') }} 
+        id="{{ id|default('relation_dropdown') }}">    
+        <input 
+            {{ rule|attr('rule') }} 
+            name="{{ name|default(id) }}" 
+            type="hidden" 
+            value="{{ item_selected[data_field] }}">  
+            <i class="linkify icon"></i>
+            <i class="icon dropdown"></i> 
+        <div class="menu">        
+            <div class="mini header">
+                <i class="linkify icon"></i>
+                {{ title }}
+            </div> 
+            <div class="divider"></div>
+            {% for key, item in properties %}
+                {% set relation = 'array>context:' ~ item.name %}
+                <div 
+                    class="item" 
+                    data-value="{{ relation }}">  
+                    {{ item.title }}
+                </div>   
+            {% endfor %}  
+            <div class="divider"></div>
+            <div 
+                class="item" 
+                data-value="">  
+                <i class="icon red trash"></i>
+                {{ labels.delete }}
+            </div>          
+        </div>
     </div>
-</div>
+{% endif %}

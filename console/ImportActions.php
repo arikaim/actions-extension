@@ -42,8 +42,9 @@ class ImportActions extends ConsoleCommand
         global $arikaim;
 
         $this->showTitle();
-    
         $this->writeLn('From extensions:');
+
+        $extensions = [];
 
         $action = Actions::create('ImportActions','actions',[
             'package_name' => 'telegram',

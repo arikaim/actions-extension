@@ -30,12 +30,9 @@ class Actions extends Extension
         // Api 
       //  $this->addApiRoute('PUT','/api/actions/run','ActionsApi','run',['public','token']); 
         // Create db tables
-        $this->createDbTable('Actions');     
-        $this->createDbTable('Rules');     
+        $this->createDbTable('Actions');           
         $this->createDbTable('Workflows');               
         $this->createDbTable('WorkflowItems');  
-    
-       // $this->createDbTable('RuleTriggers');     
         // Services
         $this->registerService('Actions');  
         // Console    

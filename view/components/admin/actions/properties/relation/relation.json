@@ -1,3 +1,6 @@
 {
-    "title": "Relation"
+    "title": "Relation",
+    "labels": {
+        "delete": "Delete"
+    }
 }

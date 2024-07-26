@@ -6,9 +6,8 @@
     "description": "Actions manager.",
     "short-description": "Actions",
     "version": "1.0.5",
-    "private-repository": true,
     "repository-type": "arikaim",
-    "repository": "arikaim-repository/actions-extension",
+    "repository": "https://github.com/arikaim/actions-extension.git",
     "position": "2",
     "install-order": 1,
     "features": [     

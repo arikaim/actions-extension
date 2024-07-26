@@ -1,0 +1,19 @@
+{
+    "name": "arikaim/actions-extension",
+    "description": "Arikam actions extension",
+    "keywords": ["Extension","Workflows","Arikaim actions extension"],
+    "type": "arikaim-extension",
+    "license": "GPL-3.0-or-later",
+    "authors": [{
+        "name": "Konstantin Atanasov",
+        "email": "info@arikaim.com",
+        "homepage": "http://arikaim.com"
+    }],
+    "require": {        
+        "arikaim/installer": "*",
+        "arikaim/rules-module": "*"       
+    },
+    "extra": {     
+        "path": "actions"
+    }
+}

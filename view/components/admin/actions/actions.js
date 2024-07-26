@@ -8,16 +8,11 @@
 
 function ContorlPanelActions() {
 
-   // this.saveConfig = function(formId, onSuccess, onError) {
-   //     return arikaim.put('/api/admin/actions/action/config',formId,onSuccess,onError);      
-  //  };
-
     this.saveSettings = function(formId, onSuccess, onError) {
         return arikaim.put('/api/admin/actions/action/settings',formId,onSuccess,onError);      
     };
 
     this.import = function(packageName, packageType, onSuccess, onError) {
-      
         return arikaim.put('/api/admin/actions/import',{
             package: packageName,
             type: packageType

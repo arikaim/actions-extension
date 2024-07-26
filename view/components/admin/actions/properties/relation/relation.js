@@ -1,5 +1,10 @@
 'use strict';
 
 arikaim.component.onLoaded(function() {
-    $('#relation_dropdown').dropdown({});
+    $('.relation-dropdown').dropdown({
+        onChange: function(selected) {
+            var fieldId = $(this).attr('field-id');
+            $('#' + fieldId).val(selected);
+        }
+    });
 });

@@ -44,6 +44,7 @@ class WorkflowsSubscriber extends EventSubscriber implements EventSubscriberInte
                 $this->runWorkflowItem($item,$event);
             }            
         }
+        
     }
 
     /**
@@ -61,7 +62,7 @@ class WorkflowsSubscriber extends EventSubscriber implements EventSubscriberInte
 
         if ($ruleIsTrue == true) {
             // run action
-            $options = $item->action_options;
+            $options = $item->getOptions('action_options');
             $action = Actions::create($item->action,null,$options)->getAction();
             $action->run();
 
