@@ -99,7 +99,8 @@ class WorkflowsSubscriber extends EventSubscriber implements EventSubscriberInte
 
         foreach ($actionOptions as $key => $value) {
             if ($arikaim->get('content')->isValidSelector($value) == true) {
-                $actionOptions[$key] = $arikaim->get('content')->get($value,$params);
+                $item = $arikaim->get('content')->get($value,$params);
+                $actionOptions[$key] = ($item == null) ? null : $item->getValue(0);
             }
         }
 

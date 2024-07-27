@@ -20,6 +20,7 @@ class ImportActions extends Action
     */
     public function init(): void
     {
+        $this->name('import.actions');
     }
 
     /**
