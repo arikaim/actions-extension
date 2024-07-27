@@ -10,9 +10,6 @@
 namespace Arikaim\Extensions\Actions\Console;
 
 use Arikaim\Core\Console\ConsoleCommand;
-use Arikaim\Core\Db\Model;
-use Arikaim\Extensions\Actions\Rules\Rule;
-
 use Arikaim\Core\Actions\Actions;
 
 /**
@@ -47,7 +44,7 @@ class ImportActions extends ConsoleCommand
         $extensions = $arikaim->get('packages')->create('extension')->getPackages(true);
         foreach ($extensions as $extension) {
             $this->writeLn($extension,'  ','green');
-            $action = Actions::create('ImportActions','actions',[
+            Actions::create('ImportActions','actions',[
                 'package_name' => $extension,
                 'package_type' => 'extension'
             ])->run();
@@ -59,7 +56,7 @@ class ImportActions extends ConsoleCommand
         $modules = $arikaim->get('packages')->create('module')->getPackages(true);
         foreach ($modules as $module) {
             $this->writeLn($module,'  ','green');
-            $action = Actions::create('ImportActions','actions',[
+            Actions::create('ImportActions','actions',[
                 'package_name' => $module,
                 'package_type' => 'module'
             ])->run();
