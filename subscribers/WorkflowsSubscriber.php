@@ -56,6 +56,8 @@ class WorkflowsSubscriber extends EventSubscriber implements EventSubscriberInte
      */
     protected function runWorkflowItem($item, $event): bool
     {
+        global $arikaim;
+
         $ruleIsTrue = (empty($item->rule_condition) == true) ? 
             true : 
             Rule::isTrue($item->rule_condition,$event->getParameters());
@@ -63,6 +65,10 @@ class WorkflowsSubscriber extends EventSubscriber implements EventSubscriberInte
         if ($ruleIsTrue == true) {
             // run action
             $options = $item->getOptions('action_options');
+            $options = $this->resolveActionVars($event,$options);
+
+            $arikaim->get('logger')->info('workflow action options',$options);
+            
             $action = Actions::create($item->action,null,$options)->getAction();
             $action->run();
 
@@ -72,5 +78,26 @@ class WorkflowsSubscriber extends EventSubscriber implements EventSubscriberInte
         }
 
         return false;
+    }
+
+    /**
+     * Evaluate options relations
+     * @param mixed $event
+     * @param array $actionOptions
+     * @return array
+     */
+    protected function resolveActionVars($event, array $actionOptions): array
+    {
+        global $arikaim;
+
+        $params = $event->getParameters();
+
+        foreach ($actionOptions as $key => $value) {
+            if ($arikaim->get('content')->isValidSelector($value) == true) {
+                $actionOptions[$key] = $arikaim->get('content')->get($value,$params);
+            }
+        }
+
+        return $actionOptions;
     }
 }

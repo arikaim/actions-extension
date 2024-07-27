@@ -5,7 +5,7 @@
     "type": "system",
     "description": "Actions manager.",
     "short-description": "Actions",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "repository-type": "arikaim",
     "repository": "https://github.com/arikaim/actions-extension.git",
     "position": "2",
