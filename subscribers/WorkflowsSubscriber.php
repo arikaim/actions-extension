@@ -58,25 +58,30 @@ class WorkflowsSubscriber extends EventSubscriber implements EventSubscriberInte
     {
         global $arikaim;
 
-        $ruleIsTrue = (empty($item->rule_condition) == true) ? 
-            true : 
-            Rule::isTrue($item->rule_condition,$event->getParameters());
+        try {
+            $ruleIsTrue = (empty($item->rule_condition) == true) ? 
+                true : 
+                Rule::isTrue($item->rule_condition,$event->getParameters());
 
-        if ($ruleIsTrue == true) {
-            // run action
-            $options = $item->getOptions('action_options');
-            $options = $this->resolveActionVars($event,$options);
+            if ($ruleIsTrue == true) {
+                // run action
+                $options = $item->getOptions('action_options');
+                $options = $this->resolveActionVars($event,$options);
 
-            $arikaim->get('logger')->info('workflow action options',$options);
-            
-            $action = Actions::create($item->action,null,$options)->getAction();
-            $action->run();
+                $arikaim->get('logger')->info('workflow action options',$options);
+                
+                $action = Actions::create($item->action,null,$options)->getAction();
+                $action->run();
 
-            if ($action->hasError() == false) {
-                return true;
+                if ($action->hasError() == false) {
+                    return true;
+                }
             }
+        } catch (\Exception $e) {
+            $arikaim->get('logger')->error($e->getMessage());
+            return false;
         }
-
+     
         return false;
     }
 
