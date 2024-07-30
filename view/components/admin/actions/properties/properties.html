@@ -18,13 +18,19 @@
     {% if field_group is not empty %}
         {% set field_name = field_group ~ '[' ~ field_name ~ ']' %}
     {% endif %}
-    {% set rule = (property.required == true) ? 'empty' : '' %}    
+    {% set rule = (property.required == true) ? 'empty' : '' %}  
+    {% set property_value = values[property.name]|default(property.value) %}
+    
     {% if property['type'] == 7 %}
         <div class="field {{ property.required|ifthen(true,'required') }}">      
             <label>{{ property.title }}</label>
             <div class="ui labeled input">
                 <div class="ui label">http://</div>
-                <input {{ rule|attr('rule') }} type="text" name="{{ field_name }}" value="{{ property.value }}"> 
+                <input 
+                    {{ rule|attr('rule') }} 
+                    type="text" 
+                    name="{{ field_name }}" 
+                    value="{{ property_value }}"> 
             </div>                
         </div>
     {% elseif property['type'] == 3 %}  
@@ -35,7 +41,7 @@
                 id: property.id,
                 rule: (property.required == true) ? 'empty' : null,
                 field_label: property.title,          
-                value: property.value
+                value: property_value
             }) 
         }}          
     {% elseif property['type'] == 4 %}
@@ -43,7 +49,7 @@
             <label>{{ property.title }}</label>                   
             <select id="{{ field_id }}" class="ui dropdown" name="{{ field_name }}" {{ rule }}>
                 {% for item in property.items %}
-                <option value="{{ item }}" {{ property.value|ifthen(item,'selected') }}>{{ item }}</option>
+                <option value="{{ item }}" {{ property_value|ifthen(item,'selected') }}>{{ item }}</option>
                 {% endfor %}
             </select>                
         </div>
@@ -53,7 +59,7 @@
                 class: (property.required == true) ? ' field required' : 'field',
                 name: field_name,         
                 id: 'password',       
-                value: property.value
+                value: property_value
             }) 
         }}  
     {% elseif property['type'] == 8 %}
@@ -61,7 +67,7 @@
             <label>{{ property.title }}</label>    
             <textarea 
                 id="{{ field_id }}"
-                name="{{ field_name }}" {{ rule|attr('rule') }} cols="7" rows="7">{{ property.value }}</textarea>                                       
+                name="{{ field_name }}" {{ rule|attr('rule') }} cols="7" rows="7">{{ property_value }}</textarea>                                       
         </div>       
     {% elseif property['type'] == 10 %}
         {{  component('semantic~properties.items.oauth',{ 
@@ -77,7 +83,7 @@
             <label>{{ property.title }}</label>
             {{  component('semantic~language.dropdown',{                
                     name: field_name,
-                    selected: property.value,
+                    selected: property_value,
                     class: 'property-language-dropdown selection',
                     id: 'property_language_dropdown'
                 }) 
@@ -91,7 +97,7 @@
         <div 
             id="key_field_{{ property.group }}_{{ property.name }}"
             class="flex flex-row items-center p-1 border border-solid rounded-lg border-gray-300">    
-            {% if property.value is empty %}    
+            {% if property_value is empty %}    
                 {{  component('semantic~properties.items.key.edit',{ 
                         group: property.group,
                         field_name: property.name,
@@ -111,7 +117,12 @@
             </label>   
         </div>     
         <div class="ui left labeled input">                  
-            <input id="{{ field_id }}" {{ rule|attr('rule') }} type="text" name="{{ field_name }}" value="{{ property.value }}"> 
+            <input 
+                id="{{ field_id }}" 
+                {{ rule|attr('rule') }} 
+                type="text" 
+                name="{{ field_name }}" 
+                value="{{ property_value }}"> 
             {{  component('actions::admin.actions.properties.relation',{
                     event: event,
                     field_id: field_id,

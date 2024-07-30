@@ -1,7 +1,7 @@
 {% set size = size|default(15) %}
 {% set actions = createModel('Actions','actions') %}
 {% if selected is not empty %}
-    {% set item_selected = actions.findById(selected) %}
+    {% set item_selected = actions.findAction(selected) %}
 {% endif %}
 {% set items = actions.get() %}
 {% set data_field = data_field|default('uuid') %}

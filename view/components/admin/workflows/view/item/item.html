@@ -7,9 +7,12 @@
     id="row_{{ item.uuid }}">
     <div class="ui streched grid">
         <div class="column">
-            <div class="ui vertical buttons">
+            <div class="flex flex-row items-center">
                 <div class="ui basic center aligned text-center label">
                     <span class="font-bold py-2">{{ index }}</span>           
+                </div>
+                <div>
+                    {{ component('semantic~status.icon',{ status: item.status }) }}          
                 </div>
             </div>          
         </div>

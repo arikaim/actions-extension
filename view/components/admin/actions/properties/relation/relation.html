@@ -3,7 +3,7 @@
     {% set properties = service('event').getEventProperties(event) %}
 {% endif %}
 
-{% if properties is iterable %}
+{% if properties is iterable and properties|length > 0 %}
     <div
         field-id="{{ field_id }}"
         class="ui dropdown relation-dropdown {{ class }}" 

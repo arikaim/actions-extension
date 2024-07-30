@@ -13,7 +13,5 @@ Actions manager and workflow automation.
 #### Installation
 
 ```sh
-
 composer require arikaim/actions-extension
-
 ```
