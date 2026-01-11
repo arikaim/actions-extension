@@ -1,9 +1,22 @@
-{{  component('semantic~tabs',{ 
+{{  component('system:admin.tabs',{ 
         items: [    
-            { active: true ,id: 'actions_button', title: labels.actions, component: 'actions::admin.actions', icon: 'running'},  
-            { id: 'workflows_button', title: labels.workflows, component: 'actions::admin.workflows', icon: 'retweet' }        
+            { 
+                active: true ,           
+                title: labels.actions, 
+                component: 'actions::admin.actions', 
+                svg_icon: 'icons~list'
+            },  
+            {               
+                title: labels.workflows, 
+                component: 'actions::admin.workflows', 
+                svg_icon: 'icons~code' 
+            }        
         ],
-        menu: { extension: 'actions' },
-        content: { component: 'actions::admin.actions' } 
+        menu: { 
+            extension: 'actions' 
+        },
+        content: { 
+            component: 'actions::admin.actions' 
+        } 
     })
 }}
